@@ -239,7 +239,7 @@ const handleGoogleCallback = async (code) => {
         "INSERT INTO users (email, verified, signup_method) VALUES (?, ?, ?)",
         [email, true, "google"]
       );
-      let userId = result.insertId;
+      userId = result.insertId;
     }
 
     const { accessToken, refreshToken } = generateTokens(userId);
@@ -275,6 +275,66 @@ const verifyGoogle = async (email) => {
   }
 };
 
+const resendCode = async (email) => {
+  const connection = await pool.getConnection();
+  try {
+    // Check if the user exists
+    const [existingUsers] = await connection.query(
+      "SELECT * FROM users WHERE email = ?",
+      [email]
+    );
+
+    if (existingUsers.length === 0) {
+      throw new Error("User not found");
+    }
+
+    const user = existingUsers[0];
+    if (user.verified) {
+      throw new Error("User is already verified");
+    }
+
+    const verificationCode = generateCode();
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+    console.log(
+      "verification code and expires at: ",
+      verificationCode,
+      expiresAt
+    );
+
+    await connection.query(
+      "UPDATE codes SET code = ?, expires_at = ? WHERE email = ?",
+      [verificationCode, expiresAt, email]
+    );
+
+    await sendVerificationEmail(
+      email,
+      verificationCode,
+      `Your new verification code is: ${verificationCode}. It expires in 10 minutes.`
+    );
+
+    return { message: "New verification code sent", email };
+  } catch (error) {
+    console.error("Resend code error:", error.message);
+    throw new Error(error.message);
+  } finally {
+    connection.release();
+  }
+};
+
+
+const cleanupUnverifiedUsers = async () => {
+  const connection = pool.getConnection();
+  
+  try {
+    console.log("Cleaning the users which have not verified...");
+    const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    const [deletedUsers] = await connection.query(
+      "DELETE FROM users WHERE verified = FALSE AND created_at < ?",
+      [oneDayAgo]
+    )
+  }
+}
+
 module.exports = {
   initiateSignUp,
   verifyCode,
@@ -282,4 +342,5 @@ module.exports = {
   handleGoogleCallback,
   verifyGoogle,
   generateTokens,
+  resendCode,
 };

@@ -6,6 +6,7 @@ const {
   handleGoogleCallback,
   verifyGoogle,
   generateTokens,
+  resendCode,
 } = require("../services/authService");
 
 const signup = async (req, res) => {
@@ -164,13 +165,15 @@ const refreshTokenHandler = async (req, res) => {
 };
 
 const resendCodeHandler = async (req, res) => {
-  const { email } = req.body;
-  if (!email) return res.status(400).json({ message: "Email is requires" });
+  console.log("Resend code request received at:", new Date().toISOString());
   try {
-    const result = await initiateSignUp(email);
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ message: "Email is required" });
+    const result = await resendCode(email);
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Resend code error:", error.message);
+    res.status(400).json({ message: error.message });
   }
 };
 
