@@ -321,19 +321,24 @@ const resendCode = async (email) => {
   }
 };
 
-
 const cleanupUnverifiedUsers = async () => {
-  const connection = pool.getConnection();
-  
+  let connection;
+
   try {
+    connection = await pool.getConnection();
     console.log("Cleaning the users which have not verified...");
     const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
     const [deletedUsers] = await connection.query(
       "DELETE FROM users WHERE verified = FALSE AND created_at < ?",
       [oneDayAgo]
-    )
+    );
+    console.log(`Deleted ${deletedUsers.affectedRows} unverified users.`);
+  } catch (error) {
+    console.error("Cleanup unverified users error", error.message);
+  } finally {
+    if (connection) connection.release();
   }
-}
+};
 
 module.exports = {
   initiateSignUp,
@@ -343,4 +348,5 @@ module.exports = {
   verifyGoogle,
   generateTokens,
   resendCode,
+  cleanupUnverifiedUsers,
 };
