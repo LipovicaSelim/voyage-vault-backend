@@ -2,6 +2,8 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 require("dotenv").config();
+const cron = require("node-cron");
+const { cleanupUnverifiedUsers } = require("./services/authService");
 
 const app = express();
 
@@ -23,6 +25,15 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);
+
+cron.schedule("0 0 * * *", async () => {
+  console.log("Running scheduled cleanup of unverified users...");
+  try {
+    await cleanupUnverifiedUsers();
+  } catch (error) {
+    console.error("Crob job error:  ", error.message);
+  }
+});
 
 // Start server
 const PORT = 5000;
