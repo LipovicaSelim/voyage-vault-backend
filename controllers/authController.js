@@ -7,6 +7,8 @@ const {
   verifyGoogle,
   generateTokens,
   resendCode,
+  initiateSignIn,
+  verifySignInCode,
 } = require("../services/authService");
 
 const signup = async (req, res) => {
@@ -192,6 +194,46 @@ const logoutHandler = (req, res) => {
   res.status(200).json({ message: "Logged out successfully" });
 };
 
+const initiateSignInHandler = async (req, res) => {
+  console.log("SIgn in request received at: ", new Date().toISOString());
+
+  try {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ message: "Email is required" });
+    const result = await initiateSignIn(email);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error("Sign in error: ", error.message);
+    res.status(400).json({ message: error.message });
+  }
+};
+
+const verifySignInCodeHandler = async (req, res) => {
+  console.log("Sign-in verify request received at:", new Date().toISOString());
+  try {
+    const { email, code } = req.body;
+    if (!email || !code)
+      return res.status(400).json({ message: "Email and code are required" });
+    const result = await verifySignInCode(email, code);
+    res.cookie("accessToken", result.tokens.accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 15 * 60 * 1000,
+    });
+    res.cookie("refreshToken", result.tokens.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+    res.status(200).json({ message: result.message, email: result.email });
+  } catch (error) {
+    console.error("Sign-in verify error:", error.message);
+    res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   signup,
   verifyCodeHandler,
@@ -201,4 +243,6 @@ module.exports = {
   refreshTokenHandler,
   resendCodeHandler,
   logoutHandler,
+  initiateSignInHandler,
+  verifySignInCodeHandler,
 };

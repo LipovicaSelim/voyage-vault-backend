@@ -9,6 +9,8 @@ const {
   resendCodeHandler,
   refreshTokenHandler,
   logoutHandler,
+  initiateSignInHandler,
+  verifySignInCodeHandler,
 } = require("../controllers/authController");
 const { authenticateToken } = require("../middlewares/auth");
 const rateLimit = require("express-rate-limit");
@@ -21,14 +23,14 @@ const signupLimiter = rateLimit({
     "Too many signup attempts from this IP, please try again after 15 minutes.",
 });
 
-// Rate limiter for resend-code endpoint: 3 attempts per 5 minutes per IP
+
 const resendCodeLimiter = rateLimit({
   windowMs: 5 * 60 * 1000,
   max: 3,
   message: "Too many resend attempts, please try again after 5 minutes.",
 });
 
-router.post("/signup", signupLimiter, signup);
+router.post("/signup", signup);
 
 router.post("/verify-code", verifyCodeHandler);
 
@@ -47,4 +49,8 @@ router.post("/refresh-token", refreshTokenHandler);
 
 router.post("/logout", logoutHandler);
 
-module.exports = router;
+router.post("/signin", signupLimiter, initiateSignInHandler);
+
+router.post("/signin-verify", verifySignInCodeHandler);
+
+module.exports = router

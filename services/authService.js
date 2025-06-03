@@ -18,6 +18,9 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  tls: {
+    rejectUnauthorized: false, // 👈 Add this line
+  },
 });
 
 // Generate a 6-digit code
@@ -65,40 +68,52 @@ const generateTokens = (userId) => {
 const initiateSignUp = async (email) => {
   const connection = await pool.getConnection();
   try {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      throw new Error("Invalid email format");
-    }
-
-    console.log("Checking existing user for:", email);
     const [existingUsers] = await connection.query(
       "SELECT * FROM users WHERE email = ?",
       [email]
     );
+
     if (existingUsers.length > 0) {
-      throw new Error("User already exists");
+      const user = existingUsers[0];
+      if (user.verified) {
+        throw new Error(
+          "This email is already registered and verified. Please log in."
+        );
+      } else {
+        // Unverified user: resend code
+        const verificationCode = generateCode();
+        const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+        await connection.query(
+          "INSERT INTO codes (email, code, expires_at) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE code = ?, expires_at = ?",
+          [email, verificationCode, expiresAt, verificationCode, expiresAt]
+        );
+        await sendVerificationEmail(
+          email,
+          "Your Verification Code",
+          `Your verification code is: ${verificationCode}. It expires in 10 minutes.`
+        );
+        return { message: "Verification code resent", email };
+      }
     }
 
-    console.log("Inserting new user:", email);
-    await connection.query(
-      "INSERT INTO users (email, verified, signup_method) VALUES (?, ?, ?)",
-      [email, false, "email"]
-    );
-
-    console.log("Generating and storing code for:", email);
-    const code = generateCode();
+    const verificationCode = generateCode();
     const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
     await connection.query(
-      "INSERT INTO codes (email, code, expires_at) VALUES (?, ?, ?)",
-      [email, code, expiresAt]
+      "INSERT INTO users (email, verified, verification_code, code_expires_at, created_at) VALUES (?, FALSE, ?, ?, ?)",
+      [email, verificationCode, expiresAt, new Date()]
     );
-
-    console.log("Sending email with code:", code);
-    await sendVerificationEmail(email, code);
-
+    await connection.query(
+      "INSERT INTO codes (email, code, expires_at) VALUES (?, ?, ?)",
+      [email, verificationCode, expiresAt]
+    );
+    await sendVerificationEmail(
+      email,
+      "Your Verification Code",
+      `Your verification code is: ${verificationCode}. It expires in 10 minutes.`
+    );
     return { message: "Verification code sent", email };
   } catch (error) {
-    console.error("Error occurred:", error.message);
+    console.error("Initiate sign-up error:", error.message);
     throw new Error(error.message);
   } finally {
     connection.release();
@@ -340,6 +355,93 @@ const cleanupUnverifiedUsers = async () => {
   }
 };
 
+const initiateSignIn = async (email) => {
+  const connection = await pool.getConnection();
+  try {
+    const [existingUsers] = await connection.query(
+      "SELECT * FROM users WHERE email = ?",
+      [email]
+    );
+
+    if (existingUsers.length === 0) {
+      throw new Error("User not found. Please sign up");
+    }
+
+    const user = existingUsers[0];
+    if (!user.verified) {
+      throw new Error(
+        "Please complete signup by verifying your email. Use the signup page to resume."
+      );
+    }
+
+    const verificationCode = generateCode();
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+
+    await connection.query(
+      "INSERT INTO codes  (email, code, expires_at) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE code = ?, expires_at = ?",
+      [email, verificationCode, expiresAt, verificationCode, expiresAt]
+    );
+
+    await sendVerificationEmail(
+      email,
+      verificationCode,
+      `Your sign-in verification code is: ${verificationCode}. It expires in 10 minutes.`
+    );
+
+    return { message: "Sign-in code sent", email };
+  } catch (error) {
+    console.error("Initiate sign-in error: ", error.message);
+    throw new Error(error.message);
+  } finally {
+    connection.release();
+  }
+};
+
+const verifySignInCode = async (email, code) => {
+  const connection = await pool.getConnection();
+  try {
+    const [existingUsers] = await connection.query(
+      "SELECT * FROM users WHERE email = ?",
+      [email]
+    );
+
+    if (existingUsers.length === 0) {
+      throw new Error("User not found");
+    }
+
+    const user = existingUsers[0];
+    if (!user.verified) {
+      throw new Error("User not verified");
+    }
+
+    const [codeRows] = await connection.query(
+      "SELECT * FROM codes WHERE email = ? AND code = ?",
+      [email, code]
+    );
+
+    if (codeRows.length === 0) {
+      throw new Error("Invalid or expired code");
+    }
+
+    const codeEntry = codeRows[0];
+    if (new Date(codeEntry.expires_at) < new Date()) {
+      throw new Error("Code has expired");
+    }
+
+    const { accessToken, refreshToken } = generateTokens(user.id);
+    return {
+      message: "Sign-in successful",
+      email,
+      tokens: { accessToken, refreshToken },
+    };
+  } catch (error) {
+    console.error("Verify sign-in code error:", error.message);
+    throw new Error(error.message);
+  } finally {
+    connection.release();
+  }
+};
+
 module.exports = {
   initiateSignUp,
   verifyCode,
@@ -349,4 +451,6 @@ module.exports = {
   generateTokens,
   resendCode,
   cleanupUnverifiedUsers,
+  initiateSignIn,
+  verifySignInCode,
 };
