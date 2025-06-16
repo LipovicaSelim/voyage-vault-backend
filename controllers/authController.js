@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken");
+const pool = require("../config/db");
+
 const {
   initiateSignUp,
   verifyCode,
@@ -9,18 +11,19 @@ const {
   resendCode,
   initiateSignIn,
   verifySignInCode,
+  verifyToken,
 } = require("../services/authService");
 
 const signup = async (req, res) => {
   console.log("Signing up started");
   try {
-    const { email } = req.body;
+    const { firstName, lastName, email } = req.body;
 
     if (!email) {
       return res.status(400).json({ message: "Email is required" });
     }
 
-    const result = await initiateSignUp(email);
+    const result = await initiateSignUp(firstName, lastName, email);
     return res.status(200).json(result);
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -234,6 +237,100 @@ const verifySignInCodeHandler = async (req, res) => {
   }
 };
 
+const verifyTokenHandler = async (req, res) => {
+  try {
+    const { user, isValid } = await verifyToken(req, res);
+    if (!isValid) {
+      throw new Error("Token verification failed");
+    }
+    res.status(200).json({ message: "Token is valid", user });
+  } catch (error) {
+    console.error("Verify token error:", error.message);
+    res.status(401).json({ message: error.message });
+  }
+};
+
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const fs = require("fs").promises;
+const path = require("path");
+
+const updateProfile = async (req, res) => {
+  const { email, firstName, lastName } = req.body;
+  let profilePicture = null;
+
+  const connection = await pool.getConnection();
+  try {
+    if (req.file) {
+      try {
+        const result = await cloudinary.uploader.upload(req.file.path, {
+          folder: "voyagevault/profiles",
+        });
+        profilePicture = result.secure_url;
+        await fs.unlink(req.file.path);
+      } catch (uploadError) {
+        await fs.unlink(req.file.path);
+        throw new Error(`Cloudinary upload failed: ${uploadError.message}`);
+      }
+    }
+
+    const updates = [];
+    const values = [];
+    if (firstName) {
+      updates.push("firstName = ?");
+      values.push(firstName);
+    }
+    if (lastName) {
+      updates.push("lastName = ?");
+      values.push(lastName);
+    }
+    if (profilePicture) {
+      updates.push("profilePicture = ?");
+      values.push(profilePicture);
+    }
+    values.push(email);
+
+    if (updates.length > 0) {
+      await connection.query(
+        `UPDATE users SET ${updates.join(", ")} WHERE email = ?`,
+        values
+      );
+    }
+
+    const [users] = await connection.query(
+      "SELECT firstName, lastName, email, profilePicture FROM users WHERE email = ?",
+      [email]
+    );
+    const updatedUser = users[0];
+
+    res.status(200).json({
+      message: "Profile updated",
+      user: {
+        firstName: updatedUser.firstName,
+        lastName: updatedUser.lastName,
+        email: updatedUser.email,
+        profilePicture: updatedUser.profilePicture || null,
+      },
+    });
+  } catch (error) {
+    if (req.file && req.file.path) {
+      try {
+        await fs.unlink(req.file.path);
+      } catch (cleanupError) {
+        console.error("Failed to clean up file:", cleanupError.message);
+      }
+    }
+    res.status(500).json({ message: error.message });
+  } finally {
+    connection.release();
+  }
+};
+
 module.exports = {
   signup,
   verifyCodeHandler,
@@ -245,4 +342,6 @@ module.exports = {
   logoutHandler,
   initiateSignInHandler,
   verifySignInCodeHandler,
+  verifyTokenHandler,
+  updateProfile,
 };

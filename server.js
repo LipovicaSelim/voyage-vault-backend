@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);
+app.use("/images", require("./routes/authRoutes"));
 
 cron.schedule("0 0 * * *", async () => {
   console.log("Running scheduled cleanup of unverified users...");

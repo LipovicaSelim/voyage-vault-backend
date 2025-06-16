@@ -4,6 +4,7 @@ const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { OAuth2Client } = require("google-auth-library");
+const { sendVerificationEmail } = require("../utils/sendVerificationEmail");
 
 const client = new OAuth2Client(
   process.env.GOOGLE_CLIENT_ID,
@@ -11,38 +12,9 @@ const client = new OAuth2Client(
   "http://localhost:5000/api/auth/google-callback"
 );
 
-// Email transporting configuration
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false, // 👈 Add this line
-  },
-});
-
 // Generate a 6-digit code
 const generateCode = () => {
   return Math.floor(100000 + Math.random() * 900000).toString();
-};
-
-// Send email with the code
-const sendVerificationEmail = async (email, code) => {
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: "VoyageVault Verification Code",
-    text: `Your verification code is: ${code}. It expires in 10 minutes.`,
-  };
-
-  try {
-    await transporter.sendMail(mailOptions);
-    return true;
-  } catch (error) {
-    throw new Error(`Failed to send email: ${error.message}`);
-  }
 };
 
 const generateTokens = (userId) => {
@@ -65,7 +37,7 @@ const generateTokens = (userId) => {
 };
 
 // Sign-Up
-const initiateSignUp = async (email) => {
+const initiateSignUp = async (firstName, lastName, email) => {
   const connection = await pool.getConnection();
   try {
     const [existingUsers] = await connection.query(
@@ -84,33 +56,34 @@ const initiateSignUp = async (email) => {
         const verificationCode = generateCode();
         const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
         await connection.query(
-          "INSERT INTO codes (email, code, expires_at) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE code = ?, expires_at = ?",
-          [email, verificationCode, expiresAt, verificationCode, expiresAt]
+          "INSERT INTO codes (email, code, expires_at, created_at) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE code = ?, expires_at = ?, created_at = ?",
+          [
+            email,
+            verificationCode,
+            expiresAt,
+            new Date(),
+            verificationCode,
+            expiresAt,
+            new Date(),
+          ]
         );
-        await sendVerificationEmail(
-          email,
-          "Your Verification Code",
-          `Your verification code is: ${verificationCode}. It expires in 10 minutes.`
-        );
+        await sendVerificationEmail(email, verificationCode);
         return { message: "Verification code resent", email };
       }
     }
 
+    // New user: insert into users and codes
     const verificationCode = generateCode();
     const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
     await connection.query(
-      "INSERT INTO users (email, verified, verification_code, code_expires_at, created_at) VALUES (?, FALSE, ?, ?, ?)",
-      [email, verificationCode, expiresAt, new Date()]
+      "INSERT INTO users (firstName, lastName, email, verified, created_at, updated_at, signup_method) VALUES (?, ?, ?, FALSE, ?, ?, ?)",
+      [firstName, lastName, email, new Date(), new Date(), "email"]
     );
     await connection.query(
-      "INSERT INTO codes (email, code, expires_at) VALUES (?, ?, ?)",
-      [email, verificationCode, expiresAt]
+      "INSERT INTO codes (email, code, expires_at, created_at) VALUES (?, ?, ?, ?)",
+      [email, verificationCode, expiresAt, new Date()]
     );
-    await sendVerificationEmail(
-      email,
-      "Your Verification Code",
-      `Your verification code is: ${verificationCode}. It expires in 10 minutes.`
-    );
+    await sendVerificationEmail(email, verificationCode);
     return { message: "Verification code sent", email };
   } catch (error) {
     console.error("Initiate sign-up error:", error.message);
@@ -135,7 +108,7 @@ const verifyCode = async (email, code) => {
     }
 
     const [user] = await connection.query(
-      "SELECT id FROM users WHERE email = ?",
+      "SELECT id, firstName, lastName, email, profilePicture FROM users WHERE email = ?",
       [email]
     );
     const { accessToken, refreshToken } = generateTokens(user[0].id);
@@ -151,6 +124,13 @@ const verifyCode = async (email, code) => {
     return {
       message: "Sign-up completed successfully",
       email,
+      user: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        profilePicture: user.profilePicture || null,
+      },
       tokens: { accessToken, refreshToken },
     };
   } catch (error) {
@@ -171,6 +151,9 @@ const googleSignIn = async (idToken) => {
     });
     const payload = ticket.getPayload();
     const email = payload.email;
+    const givenName = payload.given_name || null;
+    const familyName = payload.family_name || null;
+    const profilePicture = payload.picture || null;
 
     if (!email) {
       throw new Error("Email not found in Google Token");
@@ -193,16 +176,28 @@ const googleSignIn = async (idToken) => {
     } else {
       console.log("Inserting a new user from Google Sign-In", email);
       const [result] = await connection.query(
-        "INSERT INTO users (email, verified, signup_method) VALUES (?, ?, ?)",
-        [email, true, "google"]
+        "INSERT INTO users (firstName, lastName, email, verified, signup_method) VALUES (?, ?, ?, ?, ?)",
+        [givenName, familyName, email, true, "google"]
       );
       userId = result.insertId;
     }
 
     const { accessToken, refreshToken } = generateTokens(userId);
+    const [users] = await connection.query(
+      "SELECT id, firstName, lastName, email FROM users WHERE id = ?",
+      [userId]
+    );
+    const user = users[0];
     return {
       message: "Google sign-in successful",
       email,
+      user: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        profilePicture: user.profilePicture || null,
+      },
       tokens: { accessToken, refreshToken },
     };
   } catch (error) {
@@ -310,24 +305,25 @@ const resendCode = async (email) => {
 
     const verificationCode = generateCode();
     const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
-    console.log(
-      "verification code and expires at: ",
-      verificationCode,
-      expiresAt
-    );
 
     await connection.query(
-      "UPDATE codes SET code = ?, expires_at = ? WHERE email = ?",
-      [verificationCode, expiresAt, email]
+      `INSERT INTO codes (email, code, expires_at, created_at)
+       VALUES (?, ?, ?, ?)
+       ON DUPLICATE KEY UPDATE code = ?, expires_at = ?, created_at = ?`,
+      [
+        email,
+        verificationCode,
+        expiresAt,
+        new Date(),
+        verificationCode,
+        expiresAt,
+        new Date(),
+      ]
     );
 
-    await sendVerificationEmail(
-      email,
-      verificationCode,
-      `Your new verification code is: ${verificationCode}. It expires in 10 minutes.`
-    );
+    await sendVerificationEmail(email, verificationCode);
 
-    return { message: "New verification code sent", email };
+    return { message: "Verification code resent", email };
   } catch (error) {
     console.error("Resend code error:", error.message);
     throw new Error(error.message);
@@ -382,11 +378,7 @@ const initiateSignIn = async (email) => {
       [email, verificationCode, expiresAt, verificationCode, expiresAt]
     );
 
-    await sendVerificationEmail(
-      email,
-      verificationCode,
-      `Your sign-in verification code is: ${verificationCode}. It expires in 10 minutes.`
-    );
+    await sendVerificationEmail(email, verificationCode);
 
     return { message: "Sign-in code sent", email };
   } catch (error) {
@@ -432,6 +424,13 @@ const verifySignInCode = async (email, code) => {
     return {
       message: "Sign-in successful",
       email,
+      user: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        profilePicture: user.profilePicture || null,
+      },
       tokens: { accessToken, refreshToken },
     };
   } catch (error) {
@@ -439,6 +438,74 @@ const verifySignInCode = async (email, code) => {
     throw new Error(error.message);
   } finally {
     connection.release();
+  }
+};
+
+const verifyToken = async (req, res) => {
+  const accessToken = req.cookies.accessToken;
+  if (!accessToken) {
+    throw new Error("Access token missing");
+  }
+
+  try {
+    const decoded = jwt.verify(accessToken, process.env.JWT_SECRET);
+    const connection = await pool.getConnection();
+    const [users] = await connection.query(
+      "SELECT id, firstName, lastName, email, profilePicture FROM users WHERE id = ?",
+      [decoded.userId]
+    );
+    connection.release();
+    if (users.length === 0) throw new Error("User not found");
+    const user = users[0];
+    return {
+      user: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        profilePicture: user.profilePicture || null,
+      },
+      isValid: true,
+    };
+  } catch (error) {
+    if (error.name === "TokenExpiredError") {
+      const refreshToken = req.cookies.refreshToken;
+      if (!refreshToken) {
+        throw new Error("Refresh token missing");
+      }
+
+      try {
+        const user = jwt.verify(refreshToken, process.env.JWT_SECRET);
+        const { accessToken: newAccessToken } = generateTokens(user.userId);
+        res.cookie("accessToken", newAccessToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "Strict",
+          maxAge: 15 * 60 * 1000,
+        });
+        const connection = await pool.getConnection();
+        const [users] = await connection.query(
+          "SELECT id, firstName, lastName, email FROM users WHERE id = ?",
+          [user.userId]
+        );
+        connection.release();
+        if (users.length === 0) throw new Error("User not found");
+        const refreshedUser = users[0];
+        return {
+          user: {
+            id: refreshedUser.id,
+            firstName: refreshedUser.firstName,
+            lastName: refreshedUser.lastName,
+            email: refreshedUser.email,
+            profilePicture: user.profilePicture || null,
+          },
+          isValid: true,
+        };
+      } catch (refreshError) {
+        throw new Error("Invalid or expired refresh token");
+      }
+    }
+    throw new Error("Invalid access token");
   }
 };
 
@@ -453,4 +520,5 @@ module.exports = {
   cleanupUnverifiedUsers,
   initiateSignIn,
   verifySignInCode,
+  verifyToken,
 };
