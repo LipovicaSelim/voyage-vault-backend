@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const upload = require("../middlewares/upload");
 const {
   signup,
   verifyCodeHandler,
@@ -11,6 +12,8 @@ const {
   logoutHandler,
   initiateSignInHandler,
   verifySignInCodeHandler,
+  verifyTokenHandler,
+  updateProfile,
 } = require("../controllers/authController");
 const { authenticateToken } = require("../middlewares/auth");
 const rateLimit = require("express-rate-limit");
@@ -22,7 +25,6 @@ const signupLimiter = rateLimit({
   message:
     "Too many signup attempts from this IP, please try again after 15 minutes.",
 });
-
 
 const resendCodeLimiter = rateLimit({
   windowMs: 5 * 60 * 1000,
@@ -46,6 +48,7 @@ router.get("/", authenticateToken, (req, res) =>
 router.post("/resend-code", resendCodeLimiter, resendCodeHandler);
 
 router.post("/refresh-token", refreshTokenHandler);
+router.get("/verify-token", verifyTokenHandler);
 
 router.post("/logout", logoutHandler);
 
@@ -53,4 +56,16 @@ router.post("/signin", signupLimiter, initiateSignInHandler);
 
 router.post("/signin-verify", verifySignInCodeHandler);
 
-module.exports = router
+router.post("/update-profile", upload.single("profilePicture"), updateProfile);
+
+router.get("/images/:filename", (req, res) => {
+  const filename = req.params.filename;
+  const imagePath = path.join(__dirname, "../uploads", filename);
+  res.sendFile(imagePath, (err) => {
+    if (err) {
+      res.status(404).send("Image not found");
+    }
+  });
+});
+
+module.exports = router;
