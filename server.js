@@ -12,7 +12,7 @@ const corsOptions = {
   origin: "http://localhost:5173",
   credentials: true,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  // allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 app.use(cors(corsOptions));
@@ -26,6 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);
 app.use("/images", require("./routes/authRoutes"));
+app.use("/api/trips", require("./controllers/tripController"));
 
 cron.schedule("0 0 * * *", async () => {
   console.log("Running scheduled cleanup of unverified users...");
