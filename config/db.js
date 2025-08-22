@@ -8,6 +8,7 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
+  Promise: Promise,
 });
 
 // Test the connection
@@ -16,4 +17,4 @@ pool
   .then(([rows]) => console.log("MySQL connection test:", rows[0].solution))
   .catch((err) => console.error("MySQL connection failed:", err));
 
-module.exports = pool;
+module.exports = { pool };

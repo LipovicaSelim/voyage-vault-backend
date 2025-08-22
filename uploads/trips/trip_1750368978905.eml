@@ -1,0 +1,2156 @@
+Received: from DU0PR10MB7049.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:420::17)
+ by GV2PR10MB7485.EURPRD10.PROD.OUTLOOK.COM with HTTPS; Mon, 8 Jan 2024
+ 16:44:15 +0000
+Received: from DU6P191CA0069.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:53e::22)
+ by DU0PR10MB7049.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:420::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.21; Mon, 8 Jan
+ 2024 16:44:11 +0000
+Received: from DB5PEPF00014B9F.eurprd02.prod.outlook.com
+ (2603:10a6:10:53e:cafe::de) by DU6P191CA0069.outlook.office365.com
+ (2603:10a6:10:53e::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.21 via Frontend
+ Transport; Mon, 8 Jan 2024 16:44:11 +0000
+Authentication-Results: spf=pass (sender IP is 209.85.221.176)
+ smtp.mailfrom=gmail.com; dkim=pass (signature was verified)
+ header.d=gmail.com;dmarc=pass action=none header.from=gmail.com;compauth=pass
+ reason=100
+Received-SPF: Pass (protection.outlook.com: domain of gmail.com designates
+ 209.85.221.176 as permitted sender) receiver=protection.outlook.com;
+ client-ip=209.85.221.176; helo=mail-vk1-f176.google.com; pr=C
+Received: from mail-vk1-f176.google.com (209.85.221.176) by
+ DB5PEPF00014B9F.mail.protection.outlook.com (10.167.8.169) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7181.13 via Frontend Transport; Mon, 8 Jan 2024 16:44:11 +0000
+X-IncomingTopHeaderMarker: OriginalChecksum:C7A160952775A55C45C8828A9F043B34DA6D3DB7EDE3BC6BB78D79237B5F4801;UpperCasedChecksum:5FED1BF4C7A75A2ABC2D6CD9E8A752CCD158A313DFF720A4B1E8BE86DEFD3EC7;SizeAsReceived:2596;Count:15
+Received: by mail-vk1-f176.google.com with SMTP id 71dfb90a1353d-4b87d79a7d8so158936e0c.3
+        for <selim.lipovica@outlook.com>; Mon, 08 Jan 2024 08:44:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1704732251; x=1705337051; darn=outlook.com;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=q7DqII4VyI7Tsg0DGtvDEf1zIi9puBo5p20LaZx/iqc=;
+        b=INdppqeuSZlaPG+cmxOXeMfclRm8uCeoQbd1PM91yCpg2Etn/KtbHsqlqv9LEuJoSP
+         7dVeGmSU7ugQGM6FGQLJ+T4eU75O4/xvGI8h5BwPGV9Mg6SO95Gg0qB/9mA4qXf5yRGY
+         0KWc0SwbuvGxoCfrA3Y/3bdMBqYUopQhO5Qm3jZNYqtg2gEk3RNHBNnSWKOYCI/LldTq
+         uDV6T1YBMVx0YyRDMa+VZV6CsGz9OYmxbqUiwtX+tgQrL3LF+8uwwTHmqAVWiV3VeQsx
+         x3ziGKbwxxeDwq0PpqIWUxKynucrQqDqsaSyQPe6K4drxUGTtQqnwzcyMQFnd3Xuv6S/
+         UMyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1704732251; x=1705337051;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=q7DqII4VyI7Tsg0DGtvDEf1zIi9puBo5p20LaZx/iqc=;
+        b=tufptDL060iWPlfZ0fpCTZBYruyzAE3jgFF7unLq069gM4Ajh6GqoJmJ3Q1XVQvN0Y
+         cgvk5Qc+u8VC+XHHpUEWkjk3eotlMtzmRAcUBUB6uZIi5fUGvNrhdC6PT5aIxg1jGqOG
+         XfvXZlEutuZ3mXOeL1Qmxm9CPbQdfM8CwqvbwDMZfeDecaf+qtr5aSHDaIcxqHQCi8j3
+         JYPEpLEp+4oos1aSFOZpHEuF9GLZulY77GuEEWfWeVmxJ2Mkq4NNGL/Z1mlNti2wb3AF
+         vibsEnPIC6S5gf1o0SAEKBnGZ2FQ1Hur8wfdcPVhccfGXCbBkRCZiEMhXy/5/TwPeEx9
+         9OLw==
+X-Gm-Message-State: AOJu0YyFScDwdH6rVszqRc5p+488lHOjwtFEZ+MjTPphYo68hGoQThnI
+	3slblubXq2NKPdBvyb29R/cbeUYx9wWY3fUIrQD2It0RETU=
+X-Google-Smtp-Source: AGHT+IHnCKT/T33+hFz4HBL2kC6MFMes6Y4bxKy7zeXvCQVBN7/xFo3Dwlxr7kUJkb1VeYJsfgV6Bfqy3soWKZniJcA=
+X-Received: by 2002:a05:6122:546:b0:4b6:c49a:174a with SMTP id
+ y6-20020a056122054600b004b6c49a174amr1032599vko.14.1704732250853; Mon, 08 Jan
+ 2024 08:44:10 -0800 (PST)
+References: <3C1731C8-A73D-4E3D-8D31-3A6CBE972A4F@b2x.wizz.com>
+In-Reply-To: <3C1731C8-A73D-4E3D-8D31-3A6CBE972A4F@b2x.wizz.com>
+From: Armir Lipovica <lipovicaarmir@gmail.com>
+Date: Mon, 8 Jan 2024 17:43:59 +0100
+Message-ID: <CA+OVLDL-f6EDegLsc26pQoLqjCyWiNqbHdGLx6i0zJsMdZ_U0w@mail.gmail.com>
+Subject: Fwd: Your travel itinerary: PFI75P
+To: Engjell Buzhala <engjellbuzhala@gmail.com>, selim.lipovica@outlook.com
+Content-Type: multipart/alternative; boundary="0000000000003fd94a060e71e84f"
+X-IncomingHeaderCount: 15
+Return-Path: lipovicaarmir@gmail.com
+X-MS-Exchange-Organization-ExpirationStartTime: 08 Jan 2024 16:44:11.6433
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 5ec9d787-2b2d-4194-2a77-08dc10690aac
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B9F:EE_|DU0PR10MB7049:EE_|GV2PR10MB7485:EE_
+X-MS-Exchange-Organization-AuthSource: DB5PEPF00014B9F.eurprd02.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-UserLastLogonTime: 1/8/2024 4:10:21 PM
+X-MS-Office365-Filtering-Correlation-Id: 5ec9d787-2b2d-4194-2a77-08dc10690aac
+X-MS-Exchange-EOPDirect: true
+X-Sender-IP: 209.85.221.176
+X-SID-PRA: LIPOVICAARMIR@GMAIL.COM
+X-SID-Result: PASS
+X-MS-Exchange-Organization-PCL: 2
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:0;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2024 16:44:11.5339
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5ec9d787-2b2d-4194-2a77-08dc10690aac
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B9F.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB7049
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.7377328
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.7159.020
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;ex:0;auth:1;dest:I;ENG:(5062000305)(920221119095)(90000117)(920221120095)(90011020)(91015020)(91040095)(9050020)(9060121)(9081003)(9100341)(944500132)(4810010)(4910033)(9930004)(9545005)(10172021)(9320005)(120001);
+X-Message-Delivery: Vj0xLjE7dXM9MDtsPTA7YT0xO0Q9MTtHRD0xO1NDTD0tMQ==
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?WGd0aXpNelYxalNxL0pBVys2WEJOKy9TbFlxRThITWtWNFl4cmFhY3d2L2No?=
+ =?utf-8?B?aGRrakJ6REtPT0UvcG9NNkVzYkdCTjB1SnZYbW5Lc3Y1ZnVwVlFYOXh4T2VC?=
+ =?utf-8?B?T2RWOXdXNEhaREVOOXV5Z0dBcXZmMzRiUWVZci92UlRjM1QrRk5UNzc0aitu?=
+ =?utf-8?B?dVlObVZPM3ozQnpzQ2ZwWndmVE9sRk9FVkZrQ0VlQXdGamVFQzBSQ0dvSFFn?=
+ =?utf-8?B?dElwOHNZVkkxUjNzQUVVbFVsdzdhRFlJT2pld2FjSDZTbXNKREJ3T0pXdUp1?=
+ =?utf-8?B?dWFEdll5d1BQcmQ3UU9Fci9jenVBN3gwcThhMm1MRFZyWVpFckhvRDIyeHN4?=
+ =?utf-8?B?RnlkTWllREFDSHRRVG9BL0czOXU5UlNKMExHQ3VHSCtvL2cxTWovK1dYMW5P?=
+ =?utf-8?B?MWVZdkFqSWQvbmJSYXZtU29zMVA0UlNrRTFJUDRmTjJjWHVtSzJ6K1YyUFpC?=
+ =?utf-8?B?Y09QVmtGNkJiZ1kycnFHK1g1T2tFYXFWSFZjTUU2UkF2MUxJSU5DOHNld2RB?=
+ =?utf-8?B?NVdyL0drTXA4Nnk0SEZMSGEyaHFwUWNPQmR6M0JyYU5uLzBXUzQ0UjJ2d24z?=
+ =?utf-8?B?eGF1dUNWYUNhbCtSMzZNdUwyVVBLRVUzc2Q4ZU1qbk1weENSMXkrZS8rSnhh?=
+ =?utf-8?B?UndVbnNJWjlVYWJQWGdVWDUxbFBlNTFzRUpFYVBxd2IzTE9BMkJneWhDSUg3?=
+ =?utf-8?B?M3BjSy9DeDlFS2ZwZ1JPVGlSYy9Wb1FTd2NORzFqaDNNcEpCNGEyaFYrOFh4?=
+ =?utf-8?B?NFp1aUZGZ0RSSkZPQzd0U2JsR1pNZDUwaHllS25taW9Cb2NNaThWeXI3ZW44?=
+ =?utf-8?B?VWFJamdhOGgzcWYvWG80OWx2MWVIbEkyYWd4MDlMbUs3TlU0THVwMVE2WUVr?=
+ =?utf-8?B?UGFId3FtTjQ2UlNvYzh5U3lUeWpON0twMDNWQnRxeUFKZmczK3NNU0RrRGJo?=
+ =?utf-8?B?VU5reVhBVzA5aS9UaTc2QjVHejhWbFQyWGcxTHplYm9ITG9FQllwY0hPVzdv?=
+ =?utf-8?B?NklaQm10YWVCZnRhMS9xNkVSeEM2WXEzeG5TcjRrOVdRazJpU3FZZkdoTHBl?=
+ =?utf-8?B?RGZWM0VUcVl3eGJhZXFuUElFRmppNFVHNi9IeWJtelNGZ2tzaGlublAxcWZ2?=
+ =?utf-8?B?ejVwZWhVaFhLcnJvY0NsNkhEaDRsbDB4UGV4VytLVC82NUljdUR5R1d1U3Ji?=
+ =?utf-8?B?Zm45UE90UnNKU3BSMit1OW9EcnhNZDA5L1lWa3BQVWNUT2VQbnJkbDVsdWor?=
+ =?utf-8?B?TTQvUncra2J6Sk83TU1FZERsZ3Z2N0Iyb3E3Mkw3Q2pYSjd3RmNFZFFEbjM4?=
+ =?utf-8?B?aW5tZE5MQ1cvQ2JvZG9rdWhLcVI0djlIVDUrNnJRWWQ4cDgzREZiSkNUQVBa?=
+ =?utf-8?B?cTBwNzU5YXJuWmlwSW9qY21PSjQxb0dDUHFocWZiWlVUYmY4V25YK2xmT29L?=
+ =?utf-8?B?b3RXZEc5cm10TmpldUxoNnJZVUo3eTIrY1haRU9wTWlrMHJrelg5UWJuWVdC?=
+ =?utf-8?B?MzdwcXRqekIxeDBCWmhqYkQ3S3NQQlQxTE9PUklTTjNVQUxwQWFmNmlKbTFa?=
+ =?utf-8?B?SG1aaHdsRWFJNGZiRHAwdXV5VjRQL1JwT1dKeDVJcWY3eTZGTTZYc0ZtZ3o1?=
+ =?utf-8?B?LzVQR0NmT2dPUGR4S1BtbGN6alVrTFgwczJrd0J1QUJPQVFmRlJYc25nQ1M5?=
+ =?utf-8?B?WGM0eE9oWUhQdUx6bThqRUxxVmd5K1hjMTZrUUVFY3RRdmVuOWk0UDcyUUhh?=
+ =?utf-8?B?UDFsM0ZBbnFyQlY5MHNlanRpWjVtU2RBR1VPS0Ftbm9lSEhJZHhmL1B3S1pC?=
+ =?utf-8?B?bDV1R3ZSQXBaWjVQRW4zd3lsa2Y1ZHJQK3JHSEhGbTdvTnBRZXNVZ0xVblEr?=
+ =?utf-8?B?bzVJSFYyLzZjUUIzUnJ3Z2dNZU5ldlRSWFdjNExUSThNY3N2R1hqY0NQNXVz?=
+ =?utf-8?B?NzZDT044aDM4bGhTMklwd0VPbndzR1M4S0JhY0k3dGtYNjZKR2MzWEhLcE44?=
+ =?utf-8?B?RWQwemQ3UkxvMHd6MkRsQXlKUmRLbkFEQXZNZ2w3ZHlwNFljbEVvSVUxdi9y?=
+ =?utf-8?B?TGpMZXp0U1FOcUQ0TzBoa3B6NUZFV1Q0NElpSDVqNlN6Z3VaNXBXS1NhRWZS?=
+ =?utf-8?B?SjlTVkJRTGJuczJGbldBRlo4Q051UUt2OC8xSDlhdXRNZk41MXFKVEVWamZ0?=
+ =?utf-8?B?T3RIcXV4bEMzai9Ya1lEY3h6bkxmc0ZNZGRvMm9TMlloNkdwS2hXV1YxOXZM?=
+ =?utf-8?B?ell1K3VySkkvclpqL1dZQUNQbEgxUVRubU5Fb252VllEYzVicGJuSlZLWVl1?=
+ =?utf-8?B?RSthMWt1NFRVelFXdlYzRURyMEJURFVMY3gxZElTdWVzU2hjRWJGSnlNNDRt?=
+ =?utf-8?B?bVk2M1lUSFZLU05vZVB3SzVZZTd5NFRPUTh1N3R2VFlKWktrL09peG0rZkJk?=
+ =?utf-8?B?QVY0dHJkaTEydCt5NUI4MFRFTTBJdTRpTHM4V2RyeERBb3o2RlBNenJHU1VD?=
+ =?utf-8?B?WU1CV1ptME9XT002VGZLYmFyMGY1QjF1VnIwd2RMdXlYWUVZeVNLNmxJK3lu?=
+ =?utf-8?B?c2tuRlhNellGZ01yUXg1U0k2SDdsUkVSVVJHUWZqZ3V2WFFpR04yVkJYcjc2?=
+ =?utf-8?Q?CUPXkNeuCCvg7CNTgspbJU1irTjI=3D?=
+MIME-Version: 1.0
+
+--0000000000003fd94a060e71e84f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Sinqerisht/Sincerely
+
+--------------------------------------
+
+
+*NETWORK ACCOUNTING **SH.P.K.*
+
+Kontabilitet | Auditim | Financa
+
+Accounting | Audit | Finance
+
+* Armir Lipovica*
+
+Mob: +383 (0) 49 567 342 | E-mail: lipovicaarmir@gmail.com|
+
+Adresa/Address: Ulpian=C3=AB C2, Hy.III, Nr.6, Rr/Str. Bulevardi =E2=80=9CD=
+=C3=ABshmor=C3=ABt e
+Kombit=E2=80=9D,
+10000 Prishtin=C3=AB/Pristina, Republika e Kosov=C3=ABs/Republic of Kosovo.
+
+
+---------- Forwarded message ---------
+From: noreply@wizzair.com <noreply@wizzair.com>
+Date: Mon, Jan 8, 2024 at 17:42
+Subject: Your travel itinerary: PFI75P
+To: lipovicaarmir@gmail.com <lipovicaarmir@gmail.com>
+
+
+=E2=9C=88 Wizz Air
+
+[image: Wizzair]
+<https://wizzair.com/en-gb?utm_source=3Dwizz&utm_medium=3Demail&utm_campaig=
+n=3Dsystem_email_itinerary_confirmation>
+
+[image: facebook icon] <https://www.facebook.com/wizzair/> [image: twitter
+icon] <https://twitter.com/wizzair> [image: instagram icon]
+<https://www.instagram.com/wizzair/> [image: youtube icon]
+<https://www.youtube.com/user/WizzAirCorporate> [image: linkedIn icon]
+<https://www.linkedin.com/company/wizzair>
+flights
+<https://wizzair.com/en-gb?utm_source=3Dwizz&utm_medium=3Demail&utm_campaig=
+n=3Dsystem_email_itinerary_confirmation>
+hotel
+<https://sp.booking.com/index.html?aid=3D349081&label=3Demailnewsletter-lin=
+k-349081-click_memberid-240762805>
+car
+rentals
+<https://cars.wizzair.com/wizzair?clientId=3D602211&adplat=3Dconfemail&adca=
+mp=3DCE-memberid-240762805>
+manage
+
+my booking
+<https://wizzair.com/?utm_source=3Dwizz&utm_medium=3Demail&utm_campaign=3Ds=
+ystem_email_itinerary_confirmation>
+Transfer
+<https://wizztransfer.com/> Parking <http://www.wizzparking.com/en-gb>
+
+Flight confirmation code: PFI75P
+Passenger info
+Title First name Last name Route Cabin baggage Checked-in bag Seat
+MR Armir Lipovica TIA-BCN 1/40x30x20 0 -
+BCN-TIA 1/40x30x20 0 -
+MR Selim Lipovica TIA-BCN 1/40x30x20 0 -
+BCN-TIA 1/40x30x20 0 -
+MR Engjell Buzhala TIA-BCN 1/40x30x20 0 -
+BCN-TIA 1/40x30x20 0 -
+MR Ernest Buzhala TIA-BCN 1/40x30x20 0 -
+BCN-TIA 1/40x30x20 0 -
+Flight details
+GOING OUT Flight Number: W4 3865
+Departs from: Arrives to:
+Tirana (TIA) Barcelona El Prat - Terminal 2 (BCN)
+11/03/2024 17:50 11/03/2024 20:40
+COMING BACK Flight Number: W4 3866
+Departs from: Arrives to:
+Barcelona El Prat - Terminal 2 (BCN) Tirana (TIA)
+13/03/2024 21:30 14/03/2024 00:05
+<https://sp.booking.com/searchresults.html?aid=3D349081&label=3Demailconf-e=
+mailtempcss-1296226-click_memberid-240762805&sid=3D1543887ca191990e90c91266=
+235893b4&checkin=3D2024-3-11&checkout=3D2024-3-13&iata=3DBCN&iata_orr=3D1&l=
+ang=3Den>
+<https://cars.wizzair.com/en/book?clientId=3D602177&pickupIATACode=3DBCN&dr=
+opoffIATACode=3DBCN&pickupDateTime=3D2024-03-11T20:40&returnDateTime=3D2024=
+-03-13T22:30&age=3D30&currency=3DEUR>
+*YOU ARE PROTECTED* Book your car or hotel within 24 hours via these links
+to benefit. More info <https://wizzair.com/en-gb/linked-travel-arrangements=
+>
+<https://admaster.lxm-group.com/link/13?r=3Dhttps%3A%2F%2Fwizzair.com%2Fen-=
+gb%2Finformation-and-services%2Fmemberships%2Fwizz-discount-club>
+<https://admaster.lxm-group.com/link/66?r=3Dhttps%3A%2F%2Fwizzair.com%2Fen-=
+gb%2Finformation-and-services%2Ftravel-information%2Fseat-allocation>
+Payment summary
+Payment date Payment method Payment ID Status Base Amount and currency Paym=
+ent
+in selected currency
+08/01/2024 V2 322943460 confirmed 413.91 EUR 413.91 EUR
+Description   Total
+Fare price 30.99  EUR
+Fare price 30.99  EUR
+Fare price 30.99  EUR
+Fare price 30.99  EUR
+Fare price 36.99  EUR
+Fare price 36.99  EUR
+Fare price 36.99  EUR
+Fare price 36.99  EUR
+Administration fee 72  EUR
+Group WIZZ Discount Club 69.99  EUR
+Grand total   413.91  EUR
+Reservation information
+Customer contact name: MR  Armir  Lipovica
+Customer company:
+Customer address: Ferizaj
+Confirmation code: PFI75P
+Booking date: 08/01/2024
+Contact us
+<https://wizzair.com/en-gb/information-and-services/contact/contact-us>
+Add travel services
+ASSIGNED SEATING
+Wizz Air now operates assigned seating!
+It is still not too late to select Front row or Extra Legroom seats for
+added comfort.
+UPGRADE SEATS
+<https://wizzair.com/en-GB/FlightReminder/PFI75P/Lipovica?utm_source=3Dwizz=
+&utm_medium=3Demail&utm_campaign=3Dsystem_email_itinerary_confirmation>
+For more information click here
+<https://wizzair.com/en-gb/information-and-services/travel-information/seat=
+-allocation?utm_source=3Dwizz&utm_medium=3Demail&utm_campaign=3Dsystem_emai=
+l_itinerary_confirmation>
+WIZZ PRIORITY
+Only passengers with WIZZ Priority will be able to bring their hand luggage
+(55x40x23cm, max. 10kg) onboard subject to boarding procedures at each
+airport.
+ADD WIZZ PRIORITY
+<https://wizzair.com/en-GB/FlightReminder/PFI75P/Lipovica?utm_source=3Dwizz=
+&utm_medium=3Demail&utm_campaign=3Dsystem_email_itinerary_confirmation>
+For more information click here
+<https://wizzair.com/en-gb/information-and-services/wizz-services/wizz-prio=
+rity?utm_source=3Dwizz&utm_medium=3Demail&utm_campaign=3Dsystem_email_itine=
+rary_confirmation>
+CHECKED-IN BAGS
+Add checked-in bags to your bookings. Wizz Air offers 10Kg, 20Kg, 26Kg and
+32Kg options.
+ADD CHECKED-IN BAG
+<https://wizzair.com/en-GB/FlightReminder/PFI75P/Lipovica?utm_source=3Dwizz=
+&utm_medium=3Demail&utm_campaign=3Dsystem_email_itinerary_confirmation>
+For more information click here
+<https://wizzair.com/en-GB/information-and-services/travel-information/bagg=
+age?utm_source=3Dwizz&utm_medium=3Demail&utm_campaign=3Dsystem_email_itiner=
+ary_confirmation>
+Itinerary
+This itinerary is a confirmation of your reservation and part of your
+electronic ticket. Your booking is now confirmed and you do not need to
+contact us before flying to re-confirm your travel arrangements. This
+ticket is issued as a ticket with fixed flight date. According to the
+tariff rules, all fares, taxes, charges and fees for other services for
+unused flights are non-refundable except as explicitly provided in the
+general conditions of carriage. All Wizz flights are economy-class only.
+Travel documents
+Approved photographic ID
+<https://wizzair.com/en-gb/information-and-services/travel-information/trav=
+el-documents#/?utm_source=3Dwizz&utm_medium=3Demail&utm_campaign=3Dsystem_e=
+mail_itinerary_confirmation&utm_content=3Dphotoid>
+is required on all flights to comply with the requirements of your
+departure and destination countries. If you have checked-in online you must
+present the same travel documents given during the web check-in at airport
+security and boarding gate.
+Covid-related requirements
+You are responsible for being aware of the travel conditions and applicable
+necessary documents related to your country of arrival prior to the travel!
+We recommend you to check our Travel planning map in order to be well
+informed about the applicable travel and entrance regulations of your
+destination country with regard to the requirements for testing,
+vaccination or documentation.
+Check-in and Boarding
+In case you have not purchased any seats with your booking, check-in will
+become available only 48 hours before departure. In case you purchased auto
+check-in, it will occur automatically 50 hours before departure. At the
+airport you can check-in for a fee. You need to be present at the boarding
+gate no later than 30 minutes before the scheduled departure time.
+Children/Minors
+If your reservation includes a child/minor please make sure you are aware
+of the rules of the departure country regarding children travelling abroad.
+Please make sure that you are in possession of all the necessary documents
+(eg. permissions from parents not travelling) required by that country. If
+you are travelling with an infant and have checked-in online, please print
+the infant's boarding card as you will need to present it at the boarding
+gate.
+Changes of reservation
+You can change the date, time and routing of your flight online or via the
+call centre and up to 3 hours prior to scheduled departure time. You will
+be required to pay change fee and any fare difference if applicable.
+
+Please note that the times of departure and arrival shown in our schedule
+and elsewhere are not guaranteed and they do not form part of your contract
+of carriage with us. We reserve the right to change them. In case the
+alteration was initiated until at least the 14th day preceding the
+departure of the flight and the change results in less than two hours
+difference in time, then You will be automatically offered to travel with
+the same flight.
+Claims
+Acceptance of the baggage without complaint made before leaving the transit
+area and without completion of the Property Irregularity Report (PIR) is
+considered to be evidence that the baggage has been delivered in good
+condition and in accordance with the contract of carriage. For more
+information regarding baggage claim please refer to the proper section of
+the general conditions of carriage
+<https://wizzair.com/en-gb/legal/general-conditions-of-carriage-for-passeng=
+ers-and-baggage?utm_source=3Dwizz&utm_medium=3Demail&utm_campaign=3Dsystem_=
+email_itinerary_confirmation&utm_content=3Dclaims>.
+
+
+Complaints relating to the carriage by air (other than baggage claims) must
+be made in writing as soon as possible, after arrival of the flight in
+connection with which you would like to complain, but not later than within
+2 months from discovering the circumstances giving rise to the complaint.
+You are liable for any loss or damage arising from the delay in making your
+complaint. Wizz Air will assess the complaint according to the general
+conditions of carriage effective on the day of the contract.
+
+Please file your complaints through the following website:
+https://wizzair.com/en-gb/information-and-services/compliments-and-complain=
+ts/
+<https://wizzair.com/en-gb/information-and-services/compliments-and-complai=
+nts/?utm_source=3Dwizz&utm_medium=3Demail&utm_campaign=3Dsystem_email_itine=
+rary_confirmation>.
+
+Medicine on Board
+We kindly recommend taking any necessary MEDCINE on board with you which
+you might need during the flight. Keep medicine in your HAND LUGGAGE at all
+times in its original packaging, carry enough to last the duration of your
+trip and carry it in your HANDBAG for easy access. We kindly recommend that
+you inform your cabin crew of any ALLERGIES or ILLNESSES. Wear a
+Medic-Alert bracelet or necklace. Consider avoiding travelling alone if you
+have health problems.
+Conditions of contract
+The provisions applicable to the carriage by air of Passengers and Baggage
+performed by Wizz Air are set out in the General Conditions of Carriage.
+<https://wizzair.com/en-gb/legal/general-conditions-of-carriage-for-passeng=
+ers-and-baggage?utm_source=3Dwizz&utm_medium=3Demail&utm_campaign=3Dsystem_=
+email_itinerary_confirmation&utm_content=3Dgcc>
+Liability
+If the passenger=E2=80=99s journey involves an ultimate destination or stop=
+ in a
+country other than the country of departure, the Montreal Convention or the
+Warsaw Convention may be applicable. These conventions govern and in most
+cases limit the liability of carriers for death or personal injury and in
+respect of loss or damage to baggage. Please refer to the general
+conditions of carriage
+<https://wizzair.com/en-gb/legal/general-conditions-of-carriage-for-passeng=
+ers-and-baggage?utm_source=3Dwizz&utm_medium=3Demail&utm_campaign=3Dsystem_=
+email_itinerary_confirmation&utm_content=3Dclaims>
+and applicable national and international legislation for complete
+information regarding air carriers=E2=80=99 liability limits and claims pro=
+cedures.
+
+Are you interested in our special offers? Sign up now!
+SUBSCRIBE
+<https://wizzair.com/en-gb/NewsLetter?utm_source=3Dwizz&utm_medium=3Demail&=
+utm_campaign=3Dsystem_email_itinerary_confirmation>
+
+--0000000000003fd94a060e71e84f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><d=
+iv><br clear=3D"all"><br clear=3D"all"><div><div dir=3D"ltr" class=3D"gmail=
+_signature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D=
+"ltr"><div dir=3D"ltr"><p style=3D"font-size:12.8px;font-family:arial,sans-=
+serif;margin:0in 0in 0pt;color:rgb(34,34,34)"><span style=3D"font-size:10pt=
+;font-family:arial,sans-serif"><font face=3D"Calibri" style=3D"font-family:=
+Calibri;color:rgb(34,34,34)">Sinqerisht/Sincerely</font></span></p><p style=
+=3D"font-family:arial,sans-serif;margin:0in 0in 0pt;color:rgb(34,34,34)"><s=
+pan style=3D"font-size:12.8px;font-family:arial,sans-serif"><font size=3D"3=
+" style=3D"font-family:arial,sans-serif;color:rgb(34,34,34)"></font></span>=
+<span style=3D"font-size:10pt;font-family:arial,sans-serif"><font face=3D"C=
+alibri" style=3D"font-family:Calibri;color:rgb(34,34,34)">-----------------=
+----</font></span><span style=3D"font-size:10pt;font-family:arial,sans-seri=
+f"><font face=3D"Calibri" style=3D"font-family:Calibri;color:rgb(34,34,34)"=
+>-----------------</font></span><span style=3D"font-size:10pt;font-family:A=
+rial,sans-serif">&nbsp;</span></p><p style=3D"font-family:arial,sans-serif;=
+margin:0in 0in 0pt;color:rgb(34,34,34)"><span style=3D"font-size:10pt;font-=
+family:Arial,sans-serif"><img width=3D"75" height=3D"96" src=3D"https://ci3=
+.googleusercontent.com/mail-sig/AIorK4xinzeXrj5HqSxsk_Rg1n7TEAzjik-2-vrB896=
+YntMIcuaNlYZf7939JcpQm9eVY_w6qGExHA0" style=3D"font-family: Arial, sans-ser=
+if;"><br></span></p><p style=3D"font-family:arial,sans-serif;margin:0in 0in=
+ 0pt;color:rgb(34,34,34)"></p><p style=3D"font-family:arial,sans-serif;marg=
+in:0in 0in 0pt;color:rgb(34,34,34)"><b style=3D"font-family:arial,sans-seri=
+f"><span style=3D"font-family:arial,sans-serif;color:rgb(42,93,176)"><font =
+face=3D"Calibri" size=3D"4" style=3D"font-family:Calibri;color:rgb(42,93,17=
+6)">NETWORK ACCOUNTING&nbsp;</font></span></b><b style=3D"font-family:arial=
+,sans-serif"><span style=3D"font-family:arial,sans-serif;color:rgb(42,93,17=
+6)"><font face=3D"Calibri" size=3D"4" style=3D"font-family:Calibri;color:rg=
+b(42,93,176)">SH.P.K.</font></span></b></p><p style=3D"font-size:12.8px;fon=
+t-family:arial,sans-serif;margin:0in 0in 0pt;color:rgb(34,34,34)"><span sty=
+le=3D"font-family:Calibri;font-size:10pt;color:rgb(51,102,255)">Kontabilite=
+t | Auditim | Financa</span></p><p style=3D"font-size:12.8px;font-family:ar=
+ial,sans-serif;margin:0in 0in 0pt;color:rgb(34,34,34)"><font size=3D"3" sty=
+le=3D"font-family:arial,sans-serif;color:rgb(34,34,34)"></font><font face=
+=3D"Calibri" style=3D"font-family:Calibri;color:rgb(34,34,34)"><span style=
+=3D"font-size:10pt;font-family:Calibri;color:rgb(51,102,255)">Accounting | =
+Audit | Finance</span></font></p><p style=3D"font-size:12.8px;font-family:a=
+rial,sans-serif;margin:0in 0in 0pt;color:rgb(34,34,34)"><b style=3D"font-fa=
+mily:Calibri;font-size:small"><span style=3D"font-size:10pt;font-family:Cal=
+ibri">&nbsp;Armir Lipovica</span></b></p><p style=3D"font-size:12.8px;font-=
+family:arial,sans-serif;margin:0in 0in 0pt;color:rgb(34,34,34)"><font size=
+=3D"3" style=3D"font-family:arial,sans-serif;color:rgb(34,34,34)"></font></=
+p><p style=3D"font-size:12.8px;font-family:arial,sans-serif;margin:0in 0in =
+0pt;color:rgb(34,34,34)"><span style=3D"font-size:8pt;font-family:arial,san=
+s-serif"><font face=3D"Calibri" style=3D"font-family:Calibri;color:rgb(34,3=
+4,34)">Mob: +383 (0) 49 567 342 |&nbsp;</font></span><span style=3D"font-si=
+ze:8pt;font-family:arial,sans-serif"><font face=3D"Calibri" style=3D"font-f=
+amily:Calibri;color:rgb(34,34,34)">E-mail: <a href=3D"mailto:lipovicaarmir@=
+gmail.com" target=3D"_blank" style=3D"font-family:Calibri">lipovicaarmir@gm=
+ail.com</a></font></span><span style=3D"font-family:Calibri;font-size:11px"=
+>|</span><span style=3D"font-size:8pt;font-family:arial,sans-serif"><font f=
+ace=3D"Calibri" style=3D"font-family:Calibri;color:rgb(34,34,34)">&nbsp;</f=
+ont></span><font face=3D"Calibri" style=3D"font-size:8pt;font-family:Calibr=
+i;color:rgb(34,34,34)">&nbsp;&nbsp;</font></p><p style=3D"font-size:12.8px;=
+font-family:arial,sans-serif;margin:0in 0in 0pt;color:rgb(34,34,34)"><span =
+style=3D"font-size:8pt;font-family:arial,sans-serif"><font face=3D"Calibri"=
+ style=3D"font-family:Calibri;color:rgb(34,34,34)">Adresa/Address: Ulpian=
+=C3=AB C2, Hy.III, Nr.6, Rr/Str. Bulevardi =E2=80=9CD=C3=ABshmor=C3=ABt e K=
+ombit=E2=80=9D,&nbsp;<br>10000 Prishtin=C3=AB/Pristina, Republika e Kosov=
+=C3=ABs/Republic of Kosovo.</font></span></p></div></div></div></div></div>=
+</div><div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" c=
+lass=3D"gmail_attr">---------- Forwarded message ---------<br>From: <strong=
+ class=3D"gmail_sendername" dir=3D"auto"><a href=3D"mailto:noreply@wizzair.=
+com">noreply@wizzair.com</a></strong> <span dir=3D"auto">&lt;<a href=3D"mai=
+lto:noreply@wizzair.com">noreply@wizzair.com</a>&gt;</span><br>Date: Mon, J=
+an 8, 2024 at 17:42<br>Subject: Your travel itinerary: PFI75P<br>To: <a hre=
+f=3D"mailto:lipovicaarmir@gmail.com">lipovicaarmir@gmail.com</a> &lt;<a hre=
+f=3D"mailto:lipovicaarmir@gmail.com">lipovicaarmir@gmail.com</a>&gt;<br></d=
+iv><br><br>
+ =20
+   =20
+   =20
+   =20
+   =20
+ =20
+  <div style=3D"box-sizing:border-box;font-family:Helvetica,Arial,sans-seri=
+f;font-size:14px;font-weight:400;line-height:20px;margin:0px;min-width:100%=
+;padding:0px;text-align:left;width:100%!important;color:rgb(52,52,52)">
+    <span style=3D"font-size:1px;line-height:1px;max-height:0px;max-width:0=
+px;opacity:0;overflow:hidden;font-family:Helvetica,Arial,sans-serif;display=
+:none!important;color:rgb(255,255,255)">
+          =E2=9C=88 Wizz Air
+        </span><table style=3D"background:repeat rgb(255,255,255);border-co=
+llapse:collapse;border-spacing:0px;font-family:Helvetica,Arial,sans-serif;f=
+ont-size:14px;font-weight:400;height:100%;line-height:20px;margin:0px;paddi=
+ng:0px;text-align:left;vertical-align:top;width:100%;color:rgb(52,52,52)">
+      <tbody style=3D"font-family:Helvetica,Arial,sans-serif">
+        <tr style=3D"padding:0px;text-align:left;vertical-align:top;font-fa=
+mily:Helvetica,Arial,sans-serif">
+          <td align=3D"center" style=3D"border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:20p=
+x;margin:0px;padding:0px;text-align:left;vertical-align:top;color:rgb(52,52=
+,52)" valign=3D"top">
+            <center style=3D"min-width:650px;width:100%;font-family:Helveti=
+ca,Arial,sans-serif">
+              <table align=3D"center" style=3D"background:repeat rgb(254,25=
+4,254);border-collapse:collapse;border-spacing:0px;float:none;margin:0px au=
+to;max-width:650px;min-width:650px;padding:0px;text-align:center;vertical-a=
+lign:top;width:650px;font-family:Helvetica,Arial,sans-serif">
+                <tbody style=3D"font-family:Helvetica,Arial,sans-serif">
+                  <tr style=3D"padding:0px;text-align:left;vertical-align:t=
+op;font-family:Helvetica,Arial,sans-serif">
+                    <td style=3D"border-collapse:collapse;font-family:Helve=
+tica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:20px;margi=
+n:0px;padding:0px;text-align:left;vertical-align:top;color:rgb(52,52,52)">
+                      <table style=3D"border-collapse:collapse;border-spaci=
+ng:0px;display:table;padding:0px;text-align:left;vertical-align:top;width:1=
+00%;font-family:Helvetica,Arial,sans-serif">
+                        <tbody style=3D"font-family:Helvetica,Arial,sans-se=
+rif">
+                          <tr style=3D"padding:0px;text-align:left;vertical=
+-align:top;font-family:Helvetica,Arial,sans-serif">
+                            <th style=3D"font-family:Helvetica,Arial,sans-s=
+erif;font-size:14px;font-weight:400;line-height:20px;margin:0px auto;paddin=
+g:0px 25px;text-align:left;width:625px;color:rgb(52,52,52)">
+                              <table style=3D"border-collapse:collapse;bord=
+er-spacing:0px;padding:0px;text-align:left;vertical-align:top;width:100%;fo=
+nt-family:Helvetica,Arial,sans-serif">
+                                <tbody style=3D"font-family:Helvetica,Arial=
+,sans-serif">
+                                  <tr style=3D"padding:0px;text-align:left;=
+vertical-align:top;font-family:Helvetica,Arial,sans-serif">
+                                    <th style=3D"font-family:Helvetica,Aria=
+l,sans-serif;font-size:14px;font-weight:400;line-height:20px;margin:0px;pad=
+ding:0px;text-align:left;color:rgb(52,52,52)">
+                                      <table style=3D"border-collapse:colla=
+pse;border-spacing:0px;padding:0px;text-align:left;vertical-align:top;width=
+:100%;font-family:Helvetica,Arial,sans-serif">
+                                        <tbody style=3D"font-family:Helveti=
+ca,Arial,sans-serif">
+                                          <tr style=3D"padding:0px;text-ali=
+gn:left;vertical-align:top;font-family:Helvetica,Arial,sans-serif">
+                                            <td height=3D"36px" style=3D"bo=
+rder-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:36p=
+x;font-weight:400;line-height:36px;margin:0px;padding:0px;text-align:left;v=
+ertical-align:top;color:rgb(52,52,52)">&nbsp;</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <table style=3D"border-bottom-width:3=
+px;border-bottom-style:solid;border-collapse:collapse;border-spacing:0px;di=
+splay:table;padding:0px;text-align:left;vertical-align:bottom;width:100%;fo=
+nt-family:Helvetica,Arial,sans-serif;border-bottom-color:rgb(211,26,139)">
+                                        <tbody style=3D"font-family:Helveti=
+ca,Arial,sans-serif">
+                                          <tr style=3D"padding:0px;text-ali=
+gn:left;vertical-align:top;font-family:Helvetica,Arial,sans-serif">
+                                            <td style=3D"border-collapse:co=
+llapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:40=
+0;line-height:20px;margin:0px;padding:0px;text-align:left;vertical-align:bo=
+ttom;width:150px;color:rgb(52,52,52)" width=3D"150"><a href=3D"https://wizz=
+air.com/en-gb?utm_source=3Dwizz&amp;utm_medium=3Demail&amp;utm_campaign=3Ds=
+ystem_email_itinerary_confirmation" style=3D"font-family:Helvetica,Arial,sa=
+ns-serif;font-weight:400;line-height:20px;margin:0px;padding:0px;text-align=
+:left;text-decoration:none;color:rgb(33,153,232)" target=3D"_blank"><img al=
+t=3D"Wizzair" height=3D"50" src=3D"https://cdn.static.wizzair.com/static/im=
+ages/newsletter/Wizz_Logo_New.png" style=3D"border: medium; clear: both; di=
+splay: block; height: 50px; margin: 0px auto; max-width: 107px; outline: 0p=
+x; padding-top: 5px; text-decoration: none; width: auto; font-family: Helve=
+tica, Arial, sans-serif;" width=3D"107"></a><table style=3D"border-collapse=
+:collapse;border-spacing:0px;padding:0px;text-align:left;vertical-align:top=
+;width:100%;font-family:Helvetica,Arial,sans-serif">
+                                                <tbody style=3D"font-family=
+:Helvetica,Arial,sans-serif">
+                                                  <tr style=3D"padding:0px;=
+text-align:left;vertical-align:top;font-family:Helvetica,Arial,sans-serif">
+                                                    <td height=3D"24px" sty=
+le=3D"border-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-=
+size:24px;font-weight:400;line-height:24px;margin:0px;padding:0px;text-alig=
+n:left;vertical-align:top;color:rgb(52,52,52)">&nbsp;</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </td>
+                                            <td style=3D"border-collapse:co=
+llapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:40=
+0;line-height:20px;margin:0px;padding:0px;text-align:left;vertical-align:to=
+p;width:450px;color:rgb(52,52,52)">
+                                              <table align=3D"right" border=
+=3D"0" cellpadding=3D"0" cellspacing=3D"" style=3D"border-collapse:collapse=
+;border-spacing:0px;padding:0px;text-align:left;vertical-align:top;width:au=
+to;font-family:Helvetica,Arial,sans-serif">
+                                                <tbody style=3D"font-family=
+:Helvetica,Arial,sans-serif">
+                                                  <tr style=3D"padding:0px;=
+text-align:left;vertical-align:top;font-family:Helvetica,Arial,sans-serif">
+                                                    <td style=3D"border-col=
+lapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-w=
+eight:400;line-height:20px;margin:0px;padding:0px 15px 17px 0px;text-align:=
+left;vertical-align:bottom;width:18px;color:rgb(52,52,52)"><a href=3D"https=
+://www.facebook.com/wizzair/" style=3D"font-family:Helvetica,Arial,sans-ser=
+if;font-weight:400;line-height:20px;margin:0px;padding:0px;text-align:left;=
+text-decoration:none;color:rgb(33,153,232)" target=3D"_blank">
+<img alt=3D"facebook icon" height=3D"18" src=3D"https://cdn.static.wizzair.=
+com/static/images/email/accountstatement/icon-facebook@2x.png" style=3D"bor=
+der: medium; clear: both; display: block; max-width: 100%; outline: 0px; te=
+xt-decoration: none; width: auto; font-family: Helvetica, Arial, sans-serif=
+;" width=3D"18"></a></td>
+                                                    <td style=3D"border-col=
+lapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-w=
+eight:400;line-height:20px;margin:0px;padding:0px 15px 17px 0px;text-align:=
+left;vertical-align:bottom;width:18px;color:rgb(52,52,52)"><a href=3D"https=
+://twitter.com/wizzair" style=3D"font-family:Helvetica,Arial,sans-serif;fon=
+t-weight:400;line-height:20px;margin:0px;padding:0px;text-align:left;text-d=
+ecoration:none;color:rgb(33,153,232)" target=3D"_blank">
+<img alt=3D"twitter icon" height=3D"16" src=3D"https://cdn.static.wizzair.c=
+om/static/images/email/accountstatement/icon-twitter@2x.png" style=3D"borde=
+r: medium; clear: both; display: block; max-width: 100%; outline: 0px; text=
+-decoration: none; width: auto; font-family: Helvetica, Arial, sans-serif;"=
+ width=3D"18"></a></td>
+                                                    <td style=3D"border-col=
+lapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-w=
+eight:400;line-height:20px;margin:0px;padding:0px 15px 17px 0px;text-align:=
+left;vertical-align:bottom;width:18px;color:rgb(52,52,52)"><a href=3D"https=
+://www.instagram.com/wizzair/" style=3D"font-family:Helvetica,Arial,sans-se=
+rif;font-weight:400;line-height:20px;margin:0px;padding:0px;text-align:left=
+;text-decoration:none;color:rgb(33,153,232)" target=3D"_blank">
+<img alt=3D"instagram icon" height=3D"18" src=3D"https://cdn.static.wizzair=
+.com/static/images/email/accountstatement/icon-instagram@2x.png" style=3D"b=
+order: medium; clear: both; display: block; max-width: 100%; outline: 0px; =
+text-decoration: none; width: auto; font-family: Helvetica, Arial, sans-ser=
+if;" width=3D"18"></a></td>
+                                                    <td style=3D"border-col=
+lapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-w=
+eight:400;line-height:20px;margin:0px;padding:0px 15px 17px 0px;text-align:=
+left;vertical-align:bottom;width:18px;color:rgb(52,52,52)"><a href=3D"https=
+://www.youtube.com/user/WizzAirCorporate" style=3D"font-family:Helvetica,Ar=
+ial,sans-serif;font-weight:400;line-height:20px;margin:0px;padding:0px;text=
+-align:left;text-decoration:none;color:rgb(33,153,232)" target=3D"_blank">
+<img alt=3D"youtube icon" height=3D"14" src=3D"https://cdn.static.wizzair.c=
+om/static/images/email/accountstatement/icon-youtube@2x.png" style=3D"borde=
+r: medium; clear: both; display: block; max-width: 100%; outline: 0px; text=
+-decoration: none; width: auto; font-family: Helvetica, Arial, sans-serif;"=
+ width=3D"18"></a></td>
+                                                    <td style=3D"border-col=
+lapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-w=
+eight:400;line-height:20px;margin:0px;padding:0px 15px 17px 0px;text-align:=
+left;vertical-align:bottom;width:18px;color:rgb(52,52,52)"><a href=3D"https=
+://www.linkedin.com/company/wizzair" style=3D"font-family:Helvetica,Arial,s=
+ans-serif;font-weight:400;line-height:20px;margin:0px;padding:0px;text-alig=
+n:left;text-decoration:none;color:rgb(33,153,232)" target=3D"_blank">
+<img alt=3D"linkedIn icon" height=3D"16" src=3D"https://cdn.static.wizzair.=
+com/static/images/email/accountstatement/icon-linkedIn@2x.png" style=3D"bor=
+der: medium; clear: both; display: block; max-width: 100%; outline: 0px; te=
+xt-decoration: none; width: auto; font-family: Helvetica, Arial, sans-serif=
+;" width=3D"18"></a></td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                              <table align=3D"right" border=
+=3D"0" cellpadding=3D"0" cellspacing=3D"" style=3D"border-collapse:collapse=
+;border-spacing:0px;padding:0px;text-align:left;vertical-align:top;width:10=
+0%;font-family:Helvetica,Arial,sans-serif">
+                                                <tbody style=3D"font-family=
+:Helvetica,Arial,sans-serif">
+                                                  <tr style=3D"padding:0px;=
+text-align:center;vertical-align:top;font-family:Helvetica,Arial,sans-serif=
+">
+                                                    <td style=3D"border-col=
+lapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:11px;font-w=
+eight:400;line-height:20px;margin:0px;padding:0px 15px 0px 0px;text-align:c=
+enter;vertical-align:top;color:rgb(52,52,52)"><a href=3D"https://wizzair.co=
+m/en-gb?utm_source=3Dwizz&amp;utm_medium=3Demail&amp;utm_campaign=3Dsystem_=
+email_itinerary_confirmation" style=3D"font-family:Helvetica,Arial,sans-ser=
+if;font-size:11px;font-weight:400;letter-spacing:-0.14px;line-height:20px;m=
+argin:0px;padding:0px;text-align:center;text-decoration:none;text-transform=
+:uppercase;color:rgb(52,52,52)" target=3D"_blank">
+                                                            flights
+                                                          </a></td>
+                                                    <td style=3D"border-col=
+lapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:11px;font-w=
+eight:400;line-height:20px;margin:0px;padding:0px 15px 0px 0px;text-align:c=
+enter;vertical-align:top;color:rgb(52,52,52)"><a href=3D"https://sp.booking=
+.com/index.html?aid=3D349081&amp;label=3Demailnewsletter-link-349081-click_=
+memberid-240762805" style=3D"font-family:Helvetica,Arial,sans-serif;font-si=
+ze:11px;font-weight:400;letter-spacing:-0.14px;line-height:20px;margin:0px;=
+padding:0px;text-align:center;text-decoration:none;text-transform:uppercase=
+;color:rgb(52,52,52)" target=3D"_blank">
+                                                            hotel
+                                                          </a></td>
+                                                    <td style=3D"border-col=
+lapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:11px;font-w=
+eight:400;line-height:20px;margin:0px;padding:0px 15px 0px 0px;text-align:c=
+enter;vertical-align:top;color:rgb(52,52,52)"><a href=3D"https://cars.wizza=
+ir.com/wizzair?clientId=3D602211&amp;adplat=3Dconfemail&amp;adcamp=3DCE-mem=
+berid-240762805" style=3D"font-family:Helvetica,Arial,sans-serif;font-size:=
+11px;font-weight:400;letter-spacing:-0.14px;line-height:20px;margin:0px;pad=
+ding:0px;text-align:center;text-decoration:none;text-transform:uppercase;co=
+lor:rgb(52,52,52)" target=3D"_blank">
+                                                            car rentals
+                                                          </a></td>
+                                                    <td style=3D"border-col=
+lapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:11px;font-w=
+eight:400;line-height:20px;margin:0px;padding:0px 15px 0px 0px;text-align:c=
+enter;vertical-align:top;color:rgb(52,52,52)"><a href=3D"https://wizzair.co=
+m/?utm_source=3Dwizz&amp;utm_medium=3Demail&amp;utm_campaign=3Dsystem_email=
+_itinerary_confirmation" style=3D"font-family:Helvetica,Arial,sans-serif;fo=
+nt-size:11px;font-weight:400;letter-spacing:-0.14px;line-height:20px;margin=
+:0px;padding:0px;text-align:center;text-decoration:none;text-transform:uppe=
+rcase;color:rgb(52,52,52)" target=3D"_blank">
+                                                            manage <br>my b=
+ooking
+                                                          </a></td>
+                                                    <td style=3D"border-col=
+lapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:11px;font-w=
+eight:400;line-height:20px;margin:0px;padding:0px 15px 0px 0px;text-align:c=
+enter;vertical-align:top;color:rgb(52,52,52)"><a href=3D"https://wizztransf=
+er.com/" style=3D"font-family:Helvetica,Arial,sans-serif;font-size:11px;fon=
+t-weight:400;letter-spacing:-0.14px;line-height:20px;margin:0px;padding:0px=
+;text-align:center;text-decoration:none;text-transform:uppercase;color:rgb(=
+52,52,52)" target=3D"_blank">
+                                                            Transfer
+                                                          </a></td>
+                                                    <td style=3D"border-col=
+lapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:11px;font-w=
+eight:400;line-height:20px;margin:0px;padding:0px 10px 0px 0px;text-align:c=
+enter;vertical-align:top;color:rgb(52,52,52)"><a href=3D"http://www.wizzpar=
+king.com/en-gb" style=3D"font-family:Helvetica,Arial,sans-serif;font-size:1=
+1px;font-weight:400;letter-spacing:-0.14px;line-height:20px;margin:0px;padd=
+ing:0px;text-align:center;text-decoration:none;text-transform:uppercase;col=
+or:rgb(52,52,52)" target=3D"_blank">
+                                                          Parking
+                                                        </a></td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                              <table style=3D"border-collap=
+se:collapse;border-spacing:0px;padding:0px;text-align:left;vertical-align:t=
+op;width:100%;font-family:Helvetica,Arial,sans-serif">
+                                                <tbody style=3D"font-family=
+:Helvetica,Arial,sans-serif">
+                                                  <tr style=3D"padding:0px;=
+text-align:left;vertical-align:top;font-family:Helvetica,Arial,sans-serif">
+                                                    <td height=3D"24px" sty=
+le=3D"border-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-=
+size:24px;font-weight:400;line-height:24px;margin:0px;padding:0px;text-alig=
+n:left;vertical-align:top;color:rgb(52,52,52)">&nbsp;</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <table style=3D"border-collapse:colla=
+pse;border-spacing:0px;display:table;padding:0px;text-align:left;vertical-a=
+lign:top;width:100%;font-family:Helvetica,Arial,sans-serif">
+                                        <tbody style=3D"font-family:Helveti=
+ca,Arial,sans-serif">
+                                          <tr style=3D"padding:0px;text-ali=
+gn:left;vertical-align:top;font-family:Helvetica,Arial,sans-serif">
+                                            <th style=3D"font-family:Helvet=
+ica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:20px;margin=
+:0px auto;padding:0px;text-align:left;width:100%;color:rgb(52,52,52)">
+                                              <table style=3D"border-collap=
+se:collapse;border-spacing:0px;padding:0px;text-align:left;vertical-align:t=
+op;width:100%;font-family:Helvetica,Arial,sans-serif">
+                                                <tbody style=3D"font-family=
+:Helvetica,Arial,sans-serif">
+                                                  <tr style=3D"padding:0px;=
+text-align:left;vertical-align:top;font-family:Helvetica,Arial,sans-serif">
+                                                    <th style=3D"font-famil=
+y:Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:20p=
+x;margin:0px;padding:0px;text-align:left;color:rgb(52,52,52)">
+                                                      <table style=3D"borde=
+r-collapse:collapse;border-spacing:0px;display:table;padding:0px;text-align=
+:left;vertical-align:top;width:100%;font-family:Helvetica,Arial,sans-serif"=
+>
+                                                        <tbody style=3D"fon=
+t-family:Helvetica,Arial,sans-serif">
+                                                          <tr style=3D"padd=
+ing:0px;text-align:left;vertical-align:top;font-family:Helvetica,Arial,sans=
+-serif">
+                                                            <th style=3D"fo=
+nt-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-he=
+ight:1.3;margin:0px auto;padding:0px;text-align:left;width:100%;color:rgb(5=
+2,52,52)">
+                                                              <table style=
+=3D"border-collapse:collapse;border-spacing:0px;padding:0px;text-align:left=
+;vertical-align:top;width:100%;font-family:Helvetica,Arial,sans-serif">
+                                                                <tbody styl=
+e=3D"font-family:Helvetica,Arial,sans-serif">
+                                                                  <tr style=
+=3D"padding:0px;text-align:left;vertical-align:top;font-family:Helvetica,Ar=
+ial,sans-serif">
+                                                                    <th sty=
+le=3D"font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400=
+;line-height:1.3;margin:0px;padding:0px;text-align:left;color:rgb(52,52,52)=
+">
+                                                                      <u st=
+yle=3D"font-family:Helvetica,Arial,sans-serif"></u>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100%=
+;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"fon=
+t-family:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Ari=
+al,sans-serif"><td style=3D"padding:0px 0px 10px;font-family:Helvetica,Aria=
+l,sans-serif"></td></tr></tbody></table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"border-col=
+lapse:collapse;border-spacing:0px;margin:0px;padding:0px;text-align:left;ve=
+rtical-align:top;width:100%;font-family:Helvetica,Arial,sans-serif;backgrou=
+nd-color:rgb(209,0,123)" width=3D"100%"><tbody style=3D"font-family:Helveti=
+ca,Arial,sans-serif"><tr style=3D"padding:0px;text-align:right;vertical-ali=
+gn:top;font-family:Helvetica,Arial,sans-serif"><td style=3D"width:50%;borde=
+r-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:16px;f=
+ont-weight:bold;margin:0px;padding:5px 30px;text-align:left;vertical-align:=
+middle;color:rgb(255,255,255)">
+            Flight confirmation code:
+          </td><td style=3D"white-space:nowrap;width:50%;border-collapse:co=
+llapse;font-family:Helvetica,Arial,sans-serif;font-size:26px;font-weight:bo=
+ld;margin:0px;padding:5px 30px;text-align:right;vertical-align:middle;color=
+:rgb(255,255,255)">PFI75P</td></tr></tbody></table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100%=
+;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"fon=
+t-family:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Ari=
+al,sans-serif"><td style=3D"padding:10px 0px 0px;font-family:Helvetica,Aria=
+l,sans-serif"></td></tr></tbody></table><table border=3D"0" cellpadding=3D"=
+0" cellspacing=3D"0" style=3D"border-collapse:collapse;border-spacing:0px;p=
+adding:0px;margin:0px;text-align:left;vertical-align:middle;width:100%;font=
+-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-fam=
+ily:Helvetica,Arial,sans-serif"><tr style=3D"padding:0px;text-align:left;ve=
+rtical-align:middle;font-family:Helvetica,Arial,sans-serif"><td style=3D"wi=
+dth:60px;height:45px;border-collapse:collapse;font-family:Helvetica,Arial,s=
+ans-serif;font-size:20px;font-weight:400;line-height:1.3;margin:0px;padding=
+:0px 0px 0px 10px;text-align:left;vertical-align:middle;color:rgb(52,52,52)=
+"><img src=3D"https://wizzair.com/static/images/common/ico-contact.png" sty=
+le=3D"font-family: Helvetica, Arial, sans-serif;"></td>
+<td style=3D"border-collapse:collapse;font-family:Helvetica,Arial,sans-seri=
+f;font-size:20px;font-weight:400;line-height:1.3;margin:0px;padding:0px;tex=
+t-align:left;vertical-align:middle;color:rgb(52,52,52)"><span style=3D"font=
+-family:Helvetica,Arial,sans-serif">Passenger info</span></td></tr></tbody>=
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"wi=
+dth:100%;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody styl=
+e=3D"font-family:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helve=
+tica,Arial,sans-serif"><td style=3D"padding:0px 0px 10px;font-family:Helvet=
+ica,Arial,sans-serif"></td></tr></tbody></table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100%=
+;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"fon=
+t-family:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Ari=
+al,sans-serif"><td style=3D"padding:10px 0px 0px;font-family:Helvetica,Aria=
+l,sans-serif"></td></tr></tbody></table><table border=3D"0" cellpadding=3D"=
+0" cellspacing=3D"0" style=3D"border-collapse:collapse;border-spacing:0px;p=
+adding:0px;margin:0px;text-align:left;vertical-align:middle;width:100%;font=
+-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-fam=
+ily:Helvetica,Arial,sans-serif">
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"white-space:nowrap;border-collapse:collapse;fo=
+nt-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-h=
+eight:1.3;margin:0px;padding:0px 5px 10px;text-align:left;vertical-align:mi=
+ddle;color:rgb(52,52,52)">
+            Title
+          </td><td style=3D"white-space:nowrap;border-collapse:collapse;fon=
+t-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-he=
+ight:1.3;margin:0px;padding:0px 5px 10px;text-align:left;vertical-align:mid=
+dle;color:rgb(52,52,52)">
+            First name
+          </td><td style=3D"white-space:nowrap;border-collapse:collapse;fon=
+t-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-he=
+ight:1.3;margin:0px;padding:0px 5px 10px;text-align:left;vertical-align:mid=
+dle;color:rgb(52,52,52)">
+            Last name
+          </td><td style=3D"white-space:nowrap;border-collapse:collapse;fon=
+t-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-he=
+ight:1.3;margin:0px;padding:0px 5px 10px;text-align:left;vertical-align:mid=
+dle;color:rgb(52,52,52)">
+            Route
+          </td><td style=3D"white-space:nowrap;border-collapse:collapse;fon=
+t-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-he=
+ight:1.3;margin:0px;padding:0px 5px 10px;text-align:left;vertical-align:mid=
+dle;color:rgb(52,52,52)">
+            Cabin baggage
+          </td><td style=3D"white-space:nowrap;border-collapse:collapse;fon=
+t-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-he=
+ight:1.3;margin:0px;padding:0px 5px 10px;text-align:left;vertical-align:mid=
+dle;color:rgb(52,52,52)">
+            Checked-in bag
+          </td><td style=3D"white-space:nowrap;border-collapse:collapse;fon=
+t-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-he=
+ight:1.3;margin:0px;padding:0px 5px 10px;text-align:left;vertical-align:mid=
+dle;color:rgb(52,52,52)">
+            Seat
+          </td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"7" styl=
+e=3D"border-bottom-width:1px;border-bottom-style:solid;font-family:Helvetic=
+a,Arial,sans-serif;border-bottom-color:rgb(242,242,242)"></td></tr>
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td rowspan=3D"2" style=3D"white-space:nowrap;b=
+order-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:12=
+px;font-weight:normal;line-height:1.3;margin:0px;padding:5px;text-align:lef=
+t;vertical-align:middle;color:rgb(52,52,52)">MR</td><td rowspan=3D"2" style=
+=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvetica,Arial=
+,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;margin:0px;pa=
+dding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52)">Armir<=
+/td><td rowspan=3D"2" style=3D"white-space:nowrap;border-collapse:collapse;=
+font-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:normal;li=
+ne-height:1.3;margin:0px;padding:5px;text-align:left;vertical-align:middle;=
+color:rgb(52,52,52)">Lipovica</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">TIA-BCN</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">
+
+                1/40x30x20
+                </td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">0</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">-</td></tr>
+
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif">
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">BCN-TIA</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">
+
+                1/40x30x20
+                </td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">0</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">-</td></tr>
+
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td rowspan=3D"2" style=3D"white-space:nowrap;b=
+order-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:12=
+px;font-weight:normal;line-height:1.3;margin:0px;padding:15px 5px 5px;text-=
+align:left;vertical-align:middle;color:rgb(52,52,52)">MR</td><td rowspan=3D=
+"2" style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:15px 5px 5px;text-align:left;vertical-align:middle;color:rgb=
+(52,52,52)">Selim</td><td rowspan=3D"2" style=3D"white-space:nowrap;border-=
+collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:12px;fon=
+t-weight:normal;line-height:1.3;margin:0px;padding:15px 5px 5px;text-align:=
+left;vertical-align:middle;color:rgb(52,52,52)">Lipovica</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:15px 5px 5px;text-align:left;vertical-align:middle;color:rgb=
+(52,52,52)">TIA-BCN</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:15px 5px 5px;text-align:left;vertical-align:middle;color:rgb=
+(52,52,52)">
+
+                1/40x30x20
+                </td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:15px 5px 5px;text-align:left;vertical-align:middle;color:rgb=
+(52,52,52)">0</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:15px 5px 5px;text-align:left;vertical-align:middle;color:rgb=
+(52,52,52)">-</td></tr>
+
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif">
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">BCN-TIA</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">
+
+                1/40x30x20
+                </td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">0</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">-</td></tr>
+
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td rowspan=3D"2" style=3D"white-space:nowrap;b=
+order-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:12=
+px;font-weight:normal;line-height:1.3;margin:0px;padding:15px 5px 5px;text-=
+align:left;vertical-align:middle;color:rgb(52,52,52)">MR</td><td rowspan=3D=
+"2" style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:15px 5px 5px;text-align:left;vertical-align:middle;color:rgb=
+(52,52,52)">Engjell</td><td rowspan=3D"2" style=3D"white-space:nowrap;borde=
+r-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:12px;f=
+ont-weight:normal;line-height:1.3;margin:0px;padding:15px 5px 5px;text-alig=
+n:left;vertical-align:middle;color:rgb(52,52,52)">Buzhala</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:15px 5px 5px;text-align:left;vertical-align:middle;color:rgb=
+(52,52,52)">TIA-BCN</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:15px 5px 5px;text-align:left;vertical-align:middle;color:rgb=
+(52,52,52)">
+
+                1/40x30x20
+                </td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:15px 5px 5px;text-align:left;vertical-align:middle;color:rgb=
+(52,52,52)">0</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:15px 5px 5px;text-align:left;vertical-align:middle;color:rgb=
+(52,52,52)">-</td></tr>
+
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif">
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">BCN-TIA</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">
+
+                1/40x30x20
+                </td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">0</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">-</td></tr>
+
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td rowspan=3D"2" style=3D"white-space:nowrap;b=
+order-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:12=
+px;font-weight:normal;line-height:1.3;margin:0px;padding:15px 5px 5px;text-=
+align:left;vertical-align:middle;color:rgb(52,52,52)">MR</td><td rowspan=3D=
+"2" style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:15px 5px 5px;text-align:left;vertical-align:middle;color:rgb=
+(52,52,52)">Ernest</td><td rowspan=3D"2" style=3D"white-space:nowrap;border=
+-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:12px;fo=
+nt-weight:normal;line-height:1.3;margin:0px;padding:15px 5px 5px;text-align=
+:left;vertical-align:middle;color:rgb(52,52,52)">Buzhala</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:15px 5px 5px;text-align:left;vertical-align:middle;color:rgb=
+(52,52,52)">TIA-BCN</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:15px 5px 5px;text-align:left;vertical-align:middle;color:rgb=
+(52,52,52)">
+
+                1/40x30x20
+                </td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:15px 5px 5px;text-align:left;vertical-align:middle;color:rgb=
+(52,52,52)">0</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:15px 5px 5px;text-align:left;vertical-align:middle;color:rgb=
+(52,52,52)">-</td></tr>
+
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif">
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">BCN-TIA</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">
+
+                1/40x30x20
+                </td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">0</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">-</td></tr>
+</tbody></table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" sty=
+le=3D"width:100%;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tb=
+ody style=3D"font-family:Helvetica,Arial,sans-serif"><tr style=3D"font-fami=
+ly:Helvetica,Arial,sans-serif"><td style=3D"padding:0px 0px 10px;font-famil=
+y:Helvetica,Arial,sans-serif"></td></tr></tbody></table>
+
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100%=
+;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"fon=
+t-family:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Ari=
+al,sans-serif"><td style=3D"padding:10px 0px 0px;font-family:Helvetica,Aria=
+l,sans-serif"></td></tr></tbody></table><table border=3D"0" cellpadding=3D"=
+0" cellspacing=3D"0" style=3D"border-collapse:collapse;border-spacing:0px;p=
+adding:0px;margin:0px;text-align:left;vertical-align:middle;width:100%;font=
+-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-fam=
+ily:Helvetica,Arial,sans-serif"><tr style=3D"padding:0px;text-align:left;ve=
+rtical-align:middle;font-family:Helvetica,Arial,sans-serif">
+<td style=3D"width:60px;height:45px;border-collapse:collapse;font-family:He=
+lvetica,Arial,sans-serif;font-size:20px;font-weight:400;line-height:1.3;mar=
+gin:0px;padding:0px 0px 0px 10px;text-align:left;vertical-align:middle;colo=
+r:rgb(52,52,52)"><img src=3D"https://wizzair.com/static/images/common/ico-p=
+lane.png" style=3D"font-family: Helvetica, Arial, sans-serif;"></td><td sty=
+le=3D"border-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-=
+size:20px;font-weight:400;line-height:1.3;margin:0px;padding:0px;text-align=
+:left;vertical-align:middle;color:rgb(52,52,52)"><span style=3D"font-family=
+:Helvetica,Arial,sans-serif">Flight details</span></td></tr></tbody></table=
+><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100=
+%;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"fo=
+nt-family:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"padding:0px 0px 10px;font-family:Helvetica,Ari=
+al,sans-serif"></td></tr></tbody></table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100%=
+;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"fon=
+t-family:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Ari=
+al,sans-serif"><td style=3D"padding:10px 0px 0px;font-family:Helvetica,Aria=
+l,sans-serif"></td></tr></tbody></table><table border=3D"0" cellpadding=3D"=
+0" cellspacing=3D"0" style=3D"table-layout:fixed;border-collapse:collapse;b=
+order-spacing:0px;padding:0px;margin:0px;text-align:left;vertical-align:mid=
+dle;width:100%;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbod=
+y style=3D"font-family:Helvetica,Arial,sans-serif">
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:50%;white-space:nowrap;border-collapse:c=
+ollapse;font-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:b=
+old;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align:m=
+iddle;color:rgb(209,0,123)">
+                GOING OUT
+              </td><td style=3D"width:18px;padding:0px;font-family:Helvetic=
+a,Arial,sans-serif"></td><td style=3D"width:50%;white-space:nowrap;border-c=
+ollapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:12px;font=
+-weight:bold;line-height:1.3;margin:0px;padding:0px;text-align:right;vertic=
+al-align:middle;color:rgb(52,52,52)">
+              Flight Number: W4&nbsp;3865</td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"3" styl=
+e=3D"border-bottom-width:1px;border-bottom-style:solid;padding:10px 0px 0px=
+;font-family:Helvetica,Arial,sans-serif;border-bottom-color:rgb(242,242,242=
+)"></td></tr><tr style=3D"text-align:left;vertical-align:middle;font-family=
+:Helvetica,Arial,sans-serif"><td style=3D"width:50%;white-space:nowrap;bord=
+er-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;=
+font-weight:normal;line-height:1.3;margin:0px;padding:0px;text-align:left;v=
+ertical-align:middle;color:rgb(68,68,68)">
+              Departs from:
+            </td><td style=3D"width:18px;font-family:Helvetica,Arial,sans-s=
+erif"></td><td style=3D"width:50%;white-space:nowrap;border-collapse:collap=
+se;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:normal=
+;line-height:1.3;margin:0px;padding:0px;text-align:right;vertical-align:mid=
+dle;color:rgb(68,68,68)">
+              Arrives to:
+            </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:50%;white-space:nowrap;border-collapse:c=
+ollapse;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:b=
+old;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align:m=
+iddle;color:rgb(68,68,68)">Tirana&nbsp;(TIA)
+            </td><td style=3D"width:18px;font-family:Helvetica,Arial,sans-s=
+erif"><img src=3D"https://wizzair.com/static/images/content/email/arrow-img=
+.jpg" style=3D"font-family: Helvetica, Arial, sans-serif;"></td><td style=
+=3D"width:50%;white-space:nowrap;border-collapse:collapse;font-family:Helve=
+tica,Arial,sans-serif;font-size:16px;font-weight:bold;line-height:1.3;margi=
+n:0px;padding:0px;text-align:right;vertical-align:middle;color:rgb(68,68,68=
+)">Barcelona El Prat - Terminal 2&nbsp;(BCN)
+            </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:50%;white-space:nowrap;border-collapse:c=
+ollapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:n=
+ormal;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align=
+:middle;color:rgb(68,68,68)">11/03/2024&nbsp;17:50</td><td style=3D"width:1=
+8px;font-family:Helvetica,Arial,sans-serif"></td><td style=3D"width:50%;whi=
+te-space:nowrap;border-collapse:collapse;font-family:Helvetica,Arial,sans-s=
+erif;font-size:14px;font-weight:normal;line-height:1.3;margin:0px;padding:0=
+px;text-align:right;vertical-align:middle;color:rgb(68,68,68)">11/03/2024&n=
+bsp;20:40</td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"3" styl=
+e=3D"padding:20px 0px 0px;font-family:Helvetica,Arial,sans-serif"></td></tr=
+>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:50%;white-space:nowrap;border-collapse:c=
+ollapse;font-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:b=
+old;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align:m=
+iddle;color:rgb(209,0,123)">
+                COMING BACK
+              </td><td style=3D"width:18px;padding:0px;font-family:Helvetic=
+a,Arial,sans-serif"></td><td style=3D"width:50%;white-space:nowrap;border-c=
+ollapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:12px;font=
+-weight:bold;line-height:1.3;margin:0px;padding:0px;text-align:right;vertic=
+al-align:middle;color:rgb(52,52,52)">
+              Flight Number: W4&nbsp;3866</td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"3" styl=
+e=3D"border-bottom-width:1px;border-bottom-style:solid;padding:10px 0px 0px=
+;font-family:Helvetica,Arial,sans-serif;border-bottom-color:rgb(242,242,242=
+)"></td></tr><tr style=3D"text-align:left;vertical-align:middle;font-family=
+:Helvetica,Arial,sans-serif"><td style=3D"width:50%;white-space:nowrap;bord=
+er-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;=
+font-weight:normal;line-height:1.3;margin:0px;padding:0px;text-align:left;v=
+ertical-align:middle;color:rgb(68,68,68)">
+              Departs from:
+            </td><td style=3D"width:18px;font-family:Helvetica,Arial,sans-s=
+erif"></td><td style=3D"width:50%;white-space:nowrap;border-collapse:collap=
+se;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:normal=
+;line-height:1.3;margin:0px;padding:0px;text-align:right;vertical-align:mid=
+dle;color:rgb(68,68,68)">
+              Arrives to:
+            </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:50%;white-space:nowrap;border-collapse:c=
+ollapse;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:b=
+old;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align:m=
+iddle;color:rgb(68,68,68)">Barcelona El Prat - Terminal 2&nbsp;(BCN)
+            </td><td style=3D"width:18px;font-family:Helvetica,Arial,sans-s=
+erif"><img src=3D"https://wizzair.com/static/images/content/email/arrow-img=
+.jpg" style=3D"font-family: Helvetica, Arial, sans-serif;"></td><td style=
+=3D"width:50%;white-space:nowrap;border-collapse:collapse;font-family:Helve=
+tica,Arial,sans-serif;font-size:16px;font-weight:bold;line-height:1.3;margi=
+n:0px;padding:0px;text-align:right;vertical-align:middle;color:rgb(68,68,68=
+)">Tirana&nbsp;(TIA)
+            </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:50%;white-space:nowrap;border-collapse:c=
+ollapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:n=
+ormal;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align=
+:middle;color:rgb(68,68,68)">13/03/2024&nbsp;21:30</td><td style=3D"width:1=
+8px;font-family:Helvetica,Arial,sans-serif"></td><td style=3D"width:50%;whi=
+te-space:nowrap;border-collapse:collapse;font-family:Helvetica,Arial,sans-s=
+erif;font-size:14px;font-weight:normal;line-height:1.3;margin:0px;padding:0=
+px;text-align:right;vertical-align:middle;color:rgb(68,68,68)">14/03/2024&n=
+bsp;00:05</td></tr>
+</tbody></table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" sty=
+le=3D"width:100%;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tb=
+ody style=3D"font-family:Helvetica,Arial,sans-serif"><tr style=3D"font-fami=
+ly:Helvetica,Arial,sans-serif"><td style=3D"padding:0px 0px 30px;font-famil=
+y:Helvetica,Arial,sans-serif"></td></tr></tbody></table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"table-layo=
+ut:fixed;border-collapse:collapse;border-spacing:0px;padding:0px;margin:0px=
+;text-align:left;vertical-align:middle;width:100%;font-family:Helvetica,Ari=
+al,sans-serif" width=3D"100%"><tbody style=3D"font-family:Helvetica,Arial,s=
+ans-serif"><tr style=3D"font-family:Helvetica,Arial,sans-serif"><td style=
+=3D"width:50%;text-align:left;font-family:Helvetica,Arial,sans-serif"><a hr=
+ef=3D"https://sp.booking.com/searchresults.html?aid=3D349081&amp;label=3Dem=
+ailconf-emailtempcss-1296226-click_memberid-240762805&amp;sid=3D1543887ca19=
+1990e90c91266235893b4&amp;checkin=3D2024-3-11&amp;checkout=3D2024-3-13&amp;=
+iata=3DBCN&amp;iata_orr=3D1&amp;lang=3Den" target=3D"_blank" style=3D"font-=
+family:Helvetica,Arial,sans-serif"><img width=3D"280" src=3D"https://cdn.st=
+atic.wizzair.com/static/images/email/Itinerary/BR21WIZWA97_Itinerary_Mail_B=
+anner_369x339px_ENG1.jpg" style=3D"font-family: Helvetica, Arial, sans-seri=
+f;"></a></td><td style=3D"width:50%;text-align:right;font-family:Helvetica,=
+Arial,sans-serif"><a href=3D"https://cars.wizzair.com/en/book?clientId=3D60=
+2177&amp;pickupIATACode=3DBCN&amp;dropoffIATACode=3DBCN&amp;pickupDateTime=
+=3D2024-03-11T20:40&amp;returnDateTime=3D2024-03-13T22:30&amp;age=3D30&amp;=
+currency=3DEUR" target=3D"_blank" style=3D"font-family:Helvetica,Arial,sans=
+-serif">
+<img width=3D"280" src=3D"https://cdn.static.wizzair.com/static/images/emai=
+l/Itinerary/Wizz_Conf_email_placement-EN.png" style=3D"font-family: Helveti=
+ca, Arial, sans-serif;"></a></td></tr></tbody></table><table border=3D"0" c=
+ellpadding=3D"0" cellspacing=3D"0" style=3D"table-layout:fixed;border-colla=
+pse:collapse;border-spacing:0px;padding:0px;margin:10px 0px 0px;text-align:=
+left;vertical-align:middle;width:100%;font-family:Helvetica,Arial,sans-seri=
+f" width=3D"100%"><tbody style=3D"font-family:Helvetica,Arial,sans-serif">
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:0px;text-align:left;vertical-align:middle;color:rgb(16=
+8,168,168)"><strong style=3D"font-family:Helvetica,Arial,sans-serif">YOU AR=
+E PROTECTED</strong>
+            Book your car or hotel within 24 hours via these links to benef=
+it.
+            <a href=3D"https://wizzair.com/en-gb/linked-travel-arrangements=
+" target=3D"_blank" style=3D"font-family:Helvetica,Arial,sans-serif">More i=
+nfo</a></td></tr></tbody></table><table border=3D"0" cellpadding=3D"0" cell=
+spacing=3D"0" style=3D"table-layout:fixed;border-collapse:collapse;border-s=
+pacing:0px;padding:0px;margin:10px 0px 30px;text-align:left;vertical-align:=
+middle;width:100%;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><t=
+body style=3D"font-family:Helvetica,Arial,sans-serif"><tr style=3D"font-fam=
+ily:Helvetica,Arial,sans-serif"><td style=3D"font-family:Helvetica,Arial,sa=
+ns-serif">
+<a href=3D"https://admaster.lxm-group.com/link/13?r=3Dhttps%3A%2F%2Fwizzair=
+.com%2Fen-gb%2Finformation-and-services%2Fmemberships%2Fwizz-discount-club"=
+ target=3D"_blank" style=3D"font-family:Helvetica,Arial,sans-serif"><img wi=
+dth=3D"600" src=3D"https://admaster.lxm-group.com/content/13?content=3Duplo=
+ads%2FcM4uqziOj4lyQE1R2N1elIkfgy5lwjTLmEpJnczx.jpg" style=3D"font-family: H=
+elvetica, Arial, sans-serif;"></a></td></tr></tbody></table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"table-layo=
+ut:fixed;border-collapse:collapse;border-spacing:0px;padding:0px;margin:10p=
+x 0px 30px;text-align:left;vertical-align:middle;width:100%;font-family:Hel=
+vetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-family:Helveti=
+ca,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Arial,sans-serif"><=
+td style=3D"font-family:Helvetica,Arial,sans-serif">
+<a href=3D"https://admaster.lxm-group.com/link/66?r=3Dhttps%3A%2F%2Fwizzair=
+.com%2Fen-gb%2Finformation-and-services%2Ftravel-information%2Fseat-allocat=
+ion" target=3D"_blank" style=3D"font-family:Helvetica,Arial,sans-serif"><im=
+g width=3D"600" src=3D"https://admaster.lxm-group.com/content/66?content=3D=
+uploads%2FJK7XiWmYMPePDHKSi09N9cvpQk0cU5LObxXqU5DH.jpg" style=3D"font-famil=
+y: Helvetica, Arial, sans-serif;"></a></td></tr></tbody></table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100%=
+;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"fon=
+t-family:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Ari=
+al,sans-serif"><td style=3D"padding:10px 0px 0px;font-family:Helvetica,Aria=
+l,sans-serif"></td></tr></tbody></table><table border=3D"0" cellpadding=3D"=
+0" cellspacing=3D"0" style=3D"border-collapse:collapse;border-spacing:0px;p=
+adding:0px;margin:0px;text-align:left;vertical-align:middle;width:100%;font=
+-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-fam=
+ily:Helvetica,Arial,sans-serif"><tr style=3D"padding:0px;text-align:left;ve=
+rtical-align:middle;font-family:Helvetica,Arial,sans-serif"><td style=3D"wi=
+dth:60px;height:45px;border-collapse:collapse;font-family:Helvetica,Arial,s=
+ans-serif;font-size:20px;font-weight:400;line-height:1.3;margin:0px;padding=
+:0px 0px 0px 10px;text-align:left;vertical-align:middle;color:rgb(52,52,52)=
+"><img src=3D"https://wizzair.com/static/images/common/ico-euro.png" style=
+=3D"font-family: Helvetica, Arial, sans-serif;"></td>
+<td style=3D"border-collapse:collapse;font-family:Helvetica,Arial,sans-seri=
+f;font-size:20px;font-weight:400;line-height:1.3;margin:0px;padding:0px;tex=
+t-align:left;vertical-align:middle;color:rgb(52,52,52)"><span style=3D"font=
+-family:Helvetica,Arial,sans-serif">Payment summary</span></td></tr></tbody=
+></table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"w=
+idth:100%;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody sty=
+le=3D"font-family:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helv=
+etica,Arial,sans-serif"><td style=3D"padding:0px 0px 10px;font-family:Helve=
+tica,Arial,sans-serif"></td></tr></tbody></table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100%=
+;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"fon=
+t-family:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Ari=
+al,sans-serif"><td style=3D"padding:10px 0px 0px;font-family:Helvetica,Aria=
+l,sans-serif"></td></tr></tbody></table><table border=3D"0" cellpadding=3D"=
+0" cellspacing=3D"0" style=3D"border-collapse:collapse;border-spacing:0px;p=
+adding:0px;margin:0px;text-align:left;vertical-align:middle;width:100%;font=
+-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-fam=
+ily:Helvetica,Arial,sans-serif"><tr style=3D"text-align:left;vertical-align=
+:middle;font-family:Helvetica,Arial,sans-serif"><td style=3D"border-collaps=
+e:collapse;font-family:Helvetica,Arial,sans-serif;font-size:12px;font-weigh=
+t:bold;line-height:1.3;margin:0px;padding:0px 5px 10px;text-align:left;vert=
+ical-align:middle;color:rgb(52,52,52)">
+            Payment date
+          </td><td style=3D"border-collapse:collapse;font-family:Helvetica,=
+Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.3;margin:0px=
+;padding:0px 5px 10px;text-align:left;vertical-align:middle;color:rgb(52,52=
+,52)">
+            Payment method
+          </td><td style=3D"border-collapse:collapse;font-family:Helvetica,=
+Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.3;margin:0px=
+;padding:0px 5px 10px;text-align:left;vertical-align:middle;color:rgb(52,52=
+,52)">
+            Payment ID
+          </td><td style=3D"border-collapse:collapse;font-family:Helvetica,=
+Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.3;margin:0px=
+;padding:0px 5px 10px;text-align:left;vertical-align:middle;color:rgb(52,52=
+,52)">
+            Status
+          </td><td style=3D"border-collapse:collapse;font-family:Helvetica,=
+Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.3;margin:0px=
+;padding:0px 5px 10px;text-align:left;vertical-align:middle;color:rgb(52,52=
+,52)">
+            Base Amount and currency
+          </td><td style=3D"border-collapse:collapse;font-family:Helvetica,=
+Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.3;margin:0px=
+;padding:0px 5px 10px;text-align:left;vertical-align:middle;color:rgb(52,52=
+,52)">
+            Payment in selected currency
+          </td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"6" styl=
+e=3D"border-bottom-width:1px;border-bottom-style:solid;font-family:Helvetic=
+a,Arial,sans-serif;border-bottom-color:rgb(242,242,242)"></td></tr><tr styl=
+e=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Arial,sans=
+-serif"><td style=3D"white-space:nowrap;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:=
+1.3;margin:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(=
+52,52,52)">08/01/2024</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">V2</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">322943460</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">confirmed</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">413.91&nbsp;EUR</td>
+<td style=3D"white-space:nowrap;border-collapse:collapse;font-family:Helvet=
+ica,Arial,sans-serif;font-size:12px;font-weight:normal;line-height:1.3;marg=
+in:0px;padding:5px;text-align:left;vertical-align:middle;color:rgb(52,52,52=
+)">413.91&nbsp;EUR</td></tr>
+</tbody></table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" sty=
+le=3D"width:100%;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tb=
+ody style=3D"font-family:Helvetica,Arial,sans-serif"><tr style=3D"font-fami=
+ly:Helvetica,Arial,sans-serif"><td style=3D"padding:0px 0px 10px;font-famil=
+y:Helvetica,Arial,sans-serif"></td></tr></tbody></table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100%=
+;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"fon=
+t-family:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Ari=
+al,sans-serif"><td style=3D"padding:10px 0px 0px;font-family:Helvetica,Aria=
+l,sans-serif"></td></tr></tbody></table><table border=3D"0" cellpadding=3D"=
+0" cellspacing=3D"0" style=3D"table-layout:fixed;border-collapse:collapse;b=
+order-spacing:0px;padding:0px;margin:0px;text-align:left;vertical-align:mid=
+dle;width:100%;font-family:Helvetica,Arial,sans-serif;font-size:12px;font-w=
+eight:normal;line-height:1.3" width=3D"100%"><tbody style=3D"font-family:He=
+lvetica,Arial,sans-serif"><tr style=3D"text-align:left;vertical-align:middl=
+e;font-family:Helvetica,Arial,sans-serif"><td style=3D"width:100%;white-spa=
+ce:nowrap;border-collapse:collapse;font-family:Helvetica,Arial,sans-serif;f=
+ont-size:12px;font-weight:bold;line-height:1.3;margin:0px;padding:5px 5px 1=
+5px 22px;text-align:left;vertical-align:middle;color:rgb(52,52,52)">
+            Description
+          </td><td style=3D"font-family:Helvetica,Arial,sans-serif"><h5 sty=
+le=3D"font-family:Helvetica,Arial,sans-serif">&nbsp;</h5></td><td style=3D"=
+width:100%;white-space:nowrap;border-collapse:collapse;font-family:Helvetic=
+a,Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.3;margin:0=
+px;padding:5px 5px 15px;text-align:right;vertical-align:middle;color:rgb(52=
+,52,52)"><span style=3D"font-family:Helvetica,Arial,sans-serif;padding:0px =
+35px 0px 25px!important">Total</span></td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"2" styl=
+e=3D"padding:5px 5px 5px 22px;font-family:Helvetica,Arial,sans-serif;backgr=
+ound-color:rgb(255,255,255)">Fare price</td><td style=3D"padding:5px 5px 5p=
+x 22px;text-align:right;margin:0px 20px 0px 0px;font-family:Helvetica,Arial=
+,sans-serif;background-color:rgb(255,255,255)"><span style=3D"font-family:H=
+elvetica,Arial,sans-serif;padding:0px 35px 0px 25px!important">30.99&nbsp;
+                  EUR</span></td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"2" styl=
+e=3D"padding:5px 5px 5px 22px;font-family:Helvetica,Arial,sans-serif;backgr=
+ound-color:rgb(239,239,239)">Fare price</td><td style=3D"padding:5px 5px 5p=
+x 22px;text-align:right;margin:0px 20px 0px 0px;font-family:Helvetica,Arial=
+,sans-serif;background-color:rgb(239,239,239)"><span style=3D"font-family:H=
+elvetica,Arial,sans-serif;padding:0px 35px 0px 25px!important">30.99&nbsp;
+                  EUR</span></td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"2" styl=
+e=3D"padding:5px 5px 5px 22px;font-family:Helvetica,Arial,sans-serif;backgr=
+ound-color:rgb(255,255,255)">Fare price</td><td style=3D"padding:5px 5px 5p=
+x 22px;text-align:right;margin:0px 20px 0px 0px;font-family:Helvetica,Arial=
+,sans-serif;background-color:rgb(255,255,255)"><span style=3D"font-family:H=
+elvetica,Arial,sans-serif;padding:0px 35px 0px 25px!important">30.99&nbsp;
+                  EUR</span></td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"2" styl=
+e=3D"padding:5px 5px 5px 22px;font-family:Helvetica,Arial,sans-serif;backgr=
+ound-color:rgb(239,239,239)">Fare price</td><td style=3D"padding:5px 5px 5p=
+x 22px;text-align:right;margin:0px 20px 0px 0px;font-family:Helvetica,Arial=
+,sans-serif;background-color:rgb(239,239,239)"><span style=3D"font-family:H=
+elvetica,Arial,sans-serif;padding:0px 35px 0px 25px!important">30.99&nbsp;
+                  EUR</span></td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"2" styl=
+e=3D"padding:5px 5px 5px 22px;font-family:Helvetica,Arial,sans-serif;backgr=
+ound-color:rgb(255,255,255)">Fare price</td><td style=3D"padding:5px 5px 5p=
+x 22px;text-align:right;margin:0px 20px 0px 0px;font-family:Helvetica,Arial=
+,sans-serif;background-color:rgb(255,255,255)"><span style=3D"font-family:H=
+elvetica,Arial,sans-serif;padding:0px 35px 0px 25px!important">36.99&nbsp;
+                  EUR</span></td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"2" styl=
+e=3D"padding:5px 5px 5px 22px;font-family:Helvetica,Arial,sans-serif;backgr=
+ound-color:rgb(239,239,239)">Fare price</td><td style=3D"padding:5px 5px 5p=
+x 22px;text-align:right;margin:0px 20px 0px 0px;font-family:Helvetica,Arial=
+,sans-serif;background-color:rgb(239,239,239)"><span style=3D"font-family:H=
+elvetica,Arial,sans-serif;padding:0px 35px 0px 25px!important">36.99&nbsp;
+                  EUR</span></td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"2" styl=
+e=3D"padding:5px 5px 5px 22px;font-family:Helvetica,Arial,sans-serif;backgr=
+ound-color:rgb(255,255,255)">Fare price</td><td style=3D"padding:5px 5px 5p=
+x 22px;text-align:right;margin:0px 20px 0px 0px;font-family:Helvetica,Arial=
+,sans-serif;background-color:rgb(255,255,255)"><span style=3D"font-family:H=
+elvetica,Arial,sans-serif;padding:0px 35px 0px 25px!important">36.99&nbsp;
+                  EUR</span></td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"2" styl=
+e=3D"padding:5px 5px 5px 22px;font-family:Helvetica,Arial,sans-serif;backgr=
+ound-color:rgb(239,239,239)">Fare price</td><td style=3D"padding:5px 5px 5p=
+x 22px;text-align:right;margin:0px 20px 0px 0px;font-family:Helvetica,Arial=
+,sans-serif;background-color:rgb(239,239,239)"><span style=3D"font-family:H=
+elvetica,Arial,sans-serif;padding:0px 35px 0px 25px!important">36.99&nbsp;
+                  EUR</span></td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"2" styl=
+e=3D"padding:5px 5px 5px 22px;font-family:Helvetica,Arial,sans-serif;backgr=
+ound-color:rgb(255,255,255)">Administration fee</td><td style=3D"padding:5p=
+x 5px 5px 22px;text-align:right;margin:0px 20px 0px 0px;font-family:Helveti=
+ca,Arial,sans-serif;background-color:rgb(255,255,255)"><span style=3D"font-=
+family:Helvetica,Arial,sans-serif;padding:0px 35px 0px 25px!important">72&n=
+bsp;
+                  EUR</span></td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"2" styl=
+e=3D"padding:5px 5px 5px 22px;font-family:Helvetica,Arial,sans-serif;backgr=
+ound-color:rgb(239,239,239)">Group WIZZ Discount Club </td><td style=3D"pad=
+ding:5px 5px 5px 22px;text-align:right;margin:0px 20px 0px 0px;font-family:=
+Helvetica,Arial,sans-serif;background-color:rgb(239,239,239)"><span style=
+=3D"font-family:Helvetica,Arial,sans-serif;padding:0px 35px 0px 25px!import=
+ant">69.99&nbsp;
+                  EUR</span></td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;white-space:nowrap;border-collapse:=
+collapse;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:=
+bold;line-height:1.3;margin:0px;padding:10px 0px 10px 22px;text-align:left;=
+vertical-align:middle;color:rgb(199,24,125)">
+            Grand total
+          </td><td style=3D"font-family:Helvetica,Arial,sans-serif"><h5 sty=
+le=3D"font-family:Helvetica,Arial,sans-serif">&nbsp;</h5></td><td style=3D"=
+width:100%;white-space:nowrap;border-collapse:collapse;font-family:Helvetic=
+a,Arial,sans-serif;font-size:16px;font-weight:bold;line-height:1.3;margin:0=
+px;padding:10px 5px 10px 0px;text-align:right;vertical-align:middle;color:r=
+gb(199,24,125)"><span style=3D"font-family:Helvetica,Arial,sans-serif;paddi=
+ng:0px 35px 0px 25px!important">413.91&nbsp;
+              EUR</span></td></tr>
+<tr style=3D"font-family:Helvetica,Arial,sans-serif"><td colspan=3D"3" styl=
+e=3D"border-bottom-width:1px;border-bottom-style:solid;font-family:Helvetic=
+a,Arial,sans-serif;border-bottom-color:rgb(242,242,242)"></td></tr></tbody>=
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"wi=
+dth:100%;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody styl=
+e=3D"font-family:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helve=
+tica,Arial,sans-serif"><td style=3D"padding:0px 0px 20px;font-family:Helvet=
+ica,Arial,sans-serif"></td></tr></tbody></table>
+
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100%=
+;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"fon=
+t-family:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Ari=
+al,sans-serif"><td style=3D"padding:10px 0px 0px;font-family:Helvetica,Aria=
+l,sans-serif"></td></tr></tbody></table><table border=3D"0" cellpadding=3D"=
+0" cellspacing=3D"0" style=3D"border-collapse:collapse;border-spacing:0px;p=
+adding:0px;margin:0px;text-align:left;vertical-align:middle;width:100%;font=
+-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-fam=
+ily:Helvetica,Arial,sans-serif"><tr style=3D"padding:0px;text-align:left;ve=
+rtical-align:middle;font-family:Helvetica,Arial,sans-serif"><td style=3D"wi=
+dth:60px;height:45px;border-collapse:collapse;font-family:Helvetica,Arial,s=
+ans-serif;font-size:20px;font-weight:400;line-height:1.3;margin:0px;padding=
+:0px 0px 0px 10px;text-align:left;vertical-align:middle;color:rgb(52,52,52)=
+">
+<img src=3D"https://wizzair.com/static/images/common/ico-contact.png" style=
+=3D"font-family: Helvetica, Arial, sans-serif;"></td><td style=3D"border-co=
+llapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-=
+weight:400;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-=
+align:middle;color:rgb(52,52,52)"><span style=3D"font-family:Helvetica,Aria=
+l,sans-serif">Reservation information</span></td></tr></tbody></table><tabl=
+e border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100%;font=
+-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-fam=
+ily:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Arial,sa=
+ns-serif"><td style=3D"padding:0px 0px 10px;font-family:Helvetica,Arial,san=
+s-serif"></td></tr></tbody></table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100%=
+;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"fon=
+t-family:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Ari=
+al,sans-serif"><td style=3D"padding:10px 0px 0px;font-family:Helvetica,Aria=
+l,sans-serif"></td></tr></tbody></table><table border=3D"0" cellpadding=3D"=
+0" cellspacing=3D"0" style=3D"table-layout:fixed;border-collapse:collapse;b=
+order-spacing:0px;padding:0px;margin:0px 10px;text-align:left;vertical-alig=
+n:middle;width:100%;font-family:Helvetica,Arial,sans-serif" width=3D"100%">=
+<tbody style=3D"font-family:Helvetica,Arial,sans-serif">
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;white-space:nowrap;border-collapse:=
+collapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:=
+bold;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align:=
+middle;color:rgb(54,54,54)">
+            Customer contact name:
+          </td><td style=3D"width:100%;white-space:nowrap;border-collapse:c=
+ollapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:n=
+ormal;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align=
+:middle;color:rgb(54,54,54)">MR&nbsp;
+            Armir&nbsp;
+            Lipovica</td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;white-space:nowrap;border-collapse:=
+collapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:=
+bold;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align:=
+middle;color:rgb(54,54,54)">
+            Customer company:
+          </td>
+<td style=3D"width:100%;white-space:nowrap;border-collapse:collapse;font-fa=
+mily:Helvetica,Arial,sans-serif;font-size:14px;font-weight:normal;line-heig=
+ht:1.3;margin:0px;padding:0px;text-align:left;vertical-align:middle;color:r=
+gb(54,54,54)"></td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;white-space:nowrap;border-collapse:=
+collapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:=
+bold;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align:=
+middle;color:rgb(54,54,54)">
+            Customer address:
+          </td><td style=3D"width:100%;white-space:nowrap;border-collapse:c=
+ollapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:n=
+ormal;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align=
+:middle;color:rgb(54,54,54)">Ferizaj  </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;white-space:nowrap;border-collapse:=
+collapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:=
+bold;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align:=
+middle;color:rgb(54,54,54)">
+            Confirmation code:
+          </td><td style=3D"width:100%;white-space:nowrap;border-collapse:c=
+ollapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:n=
+ormal;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align=
+:middle;color:rgb(54,54,54)">PFI75P</td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;white-space:nowrap;border-collapse:=
+collapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:=
+bold;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align:=
+middle;color:rgb(54,54,54)">
+            Booking date:
+          </td><td style=3D"width:100%;white-space:nowrap;border-collapse:c=
+ollapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:n=
+ormal;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align=
+:middle;color:rgb(54,54,54)">08/01/2024</td></tr></tbody></table><table bor=
+der=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100%;font-fami=
+ly:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-family:H=
+elvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Arial,sans-se=
+rif"><td style=3D"padding:0px 0px 30px;font-family:Helvetica,Arial,sans-ser=
+if"></td></tr></tbody></table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"table-layo=
+ut:fixed;border-collapse:collapse;border-spacing:0px;padding:0px;margin:0px=
+ 10px;text-align:left;vertical-align:middle;width:100%;font-family:Helvetic=
+a,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-family:Helvetica,Ar=
+ial,sans-serif"><tr style=3D"padding:0px;text-align:left;vertical-align:mid=
+dle;font-family:Helvetica,Arial,sans-serif"><td style=3D"width:100%;white-s=
+pace:nowrap;border-collapse:collapse;font-family:Helvetica,Arial,sans-serif=
+;font-size:14px;font-weight:normal;line-height:1.3;margin:0px;padding:0px;t=
+ext-align:left;vertical-align:middle;color:rgb(54,54,54)"><a href=3D"https:=
+//wizzair.com/en-gb/information-and-services/contact/contact-us" target=3D"=
+_blank" style=3D"font-family:Helvetica,Arial,sans-serif">
+              Contact us
+            </a></td></tr></tbody></table><table border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" style=3D"width:100%;font-family:Helvetica,Arial,sa=
+ns-serif" width=3D"100%"><tbody style=3D"font-family:Helvetica,Arial,sans-s=
+erif"><tr style=3D"font-family:Helvetica,Arial,sans-serif"><td style=3D"pad=
+ding:10px 0px 0px;font-family:Helvetica,Arial,sans-serif"></td></tr></tbody=
+></table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100%=
+;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"fon=
+t-family:Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Ari=
+al,sans-serif"><td style=3D"padding:10px 0px 0px;font-family:Helvetica,Aria=
+l,sans-serif"></td></tr></tbody></table><table border=3D"0" cellpadding=3D"=
+0" cellspacing=3D"0" style=3D"border-collapse:collapse;border-spacing:0px;p=
+adding:0px;margin:0px;text-align:left;vertical-align:middle;width:100%;font=
+-family:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-fam=
+ily:Helvetica,Arial,sans-serif"><tr style=3D"padding:0px;text-align:left;ve=
+rtical-align:middle;font-family:Helvetica,Arial,sans-serif"><td style=3D"wi=
+dth:60px;height:45px;border-collapse:collapse;font-family:Helvetica,Arial,s=
+ans-serif;font-size:20px;font-weight:400;line-height:1.3;margin:0px;padding=
+:0px 0px 0px 10px;text-align:left;vertical-align:middle;color:rgb(52,52,52)=
+">
+<img src=3D"https://wizzair.com/static/images/common/ico-chair.png" style=
+=3D"font-family: Helvetica, Arial, sans-serif;"></td><td style=3D"border-co=
+llapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-=
+weight:400;line-height:1.3;margin:0px;padding:0px;text-align:left;vertical-=
+align:middle;color:rgb(52,52,52)"><span style=3D"font-family:Helvetica,Aria=
+l,sans-serif">Add travel services</span></td></tr></tbody></table><table bo=
+rder=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100%;font-fam=
+ily:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-family:=
+Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Arial,sans-s=
+erif"><td style=3D"padding:0px 0px 10px;font-family:Helvetica,Arial,sans-se=
+rif"></td></tr></tbody></table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"table-layo=
+ut:fixed;border-collapse:collapse;border-spacing:0px;padding:0px;margin:20p=
+x 0px;text-align:left;vertical-align:middle;width:100%;font-family:Helvetic=
+a,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-family:Helvetica,Ar=
+ial,sans-serif">
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td style=3D"width:50%;border-collapse:collapse=
+;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:400;line=
+-height:1.3;margin:0px;padding:0px;text-align:left;vertical-align:middle;co=
+lor:rgb(52,52,52)"><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" =
+style=3D"border-collapse:collapse;border-spacing:0px;padding:0px;margin:0px=
+;text-align:left;vertical-align:middle;width:100%;font-family:Helvetica,Ari=
+al,sans-serif" width=3D"100%"><tbody style=3D"font-family:Helvetica,Arial,s=
+ans-serif">
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td style=3D"width:36px;border-collapse:collaps=
+e;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:400;lin=
+e-height:1.3;margin:0px;padding:0px 10px 0px 0px;text-align:left;vertical-a=
+lign:middle;color:rgb(52,52,52)"><img src=3D"https://wizzair.com/static/ima=
+ges/ico-seat.jpg" style=3D"font-family: Helvetica, Arial, sans-serif;"></td=
+><td style=3D"width:100%;border-collapse:collapse;font-family:Helvetica,Ari=
+al,sans-serif;font-size:14px;font-weight:bold;line-height:1.3;margin:0px;pa=
+dding:0px;text-align:left;vertical-align:middle;color:rgb(209,0,123)"><span=
+ style=3D"font-family:Helvetica,Arial,sans-serif">ASSIGNED SEATING</span></=
+td></tr>
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td colspan=3D"2" style=3D"border-collapse:coll=
+apse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:norm=
+al;line-height:1.3;margin:0px;padding:0px 10px 0px 0px;text-align:left;vert=
+ical-align:middle;color:rgb(54,54,54)">
+                    Wizz Air now operates assigned seating!<br>It is still =
+not too late to select Front row or Extra Legroom seats for added comfort.
+                  </td></tr></tbody></table></td><td style=3D"width:50%;bor=
+der-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:20px=
+;font-weight:400;line-height:1.3;margin:0px;padding:0px;text-align:center;v=
+ertical-align:middle;color:rgb(52,52,52)"><table border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" style=3D"table-layout:fixed;border-collapse:collap=
+se;border-spacing:0px;padding:0px;margin:0px;text-align:left;vertical-align=
+:middle;width:100%;font-family:Helvetica,Arial,sans-serif" width=3D"100%"><=
+tbody style=3D"font-family:Helvetica,Arial,sans-serif">
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td style=3D"border-collapse:collapse;font-fami=
+ly:Helvetica,Arial,sans-serif;font-size:13px;font-weight:bold;line-height:1=
+.3;margin:0px;padding:20px 0px;text-align:center;vertical-align:middle;back=
+ground-color:rgb(181,29,131);color:rgb(255,255,255)"><a style=3D"text-decor=
+ation:none;text-transform:uppercase;font-family:Helvetica,Arial,sans-serif;=
+color:rgb(255,255,255)" href=3D"https://wizzair.com/en-GB/FlightReminder/PF=
+I75P/Lipovica?utm_source=3Dwizz&amp;utm_medium=3Demail&amp;utm_campaign=3Ds=
+ystem_email_itinerary_confirmation" target=3D"_blank">
+                        UPGRADE SEATS
+                      </a></td></tr>
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td style=3D"border-collapse:collapse;font-fami=
+ly:Helvetica,Arial,sans-serif;font-size:13px;font-weight:normal;line-height=
+:1.3;margin:0px;padding:10px 0px 0px;text-align:center;vertical-align:middl=
+e;color:rgb(99,8,115)"><a href=3D"https://wizzair.com/en-gb/information-and=
+-services/travel-information/seat-allocation?utm_source=3Dwizz&amp;utm_medi=
+um=3Demail&amp;utm_campaign=3Dsystem_email_itinerary_confirmation" target=
+=3D"_blank" style=3D"font-family:Helvetica,Arial,sans-serif">
+                      For more information click here
+                    </a></td></tr></tbody></table></td></tr>
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td style=3D"width:50%;border-collapse:collapse=
+;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:400;line=
+-height:1.3;margin:0px;padding:20px 0px 0px;text-align:left;vertical-align:=
+middle;color:rgb(52,52,52)"><table border=3D"0" cellpadding=3D"0" cellspaci=
+ng=3D"0" style=3D"border-collapse:collapse;border-spacing:0px;padding:0px;m=
+argin:0px;text-align:left;vertical-align:middle;width:100%;font-family:Helv=
+etica,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-family:Helvetic=
+a,Arial,sans-serif">
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td style=3D"width:36px;border-collapse:collaps=
+e;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:400;lin=
+e-height:1.3;margin:0px;padding:0px 10px 0px 0px;text-align:left;vertical-a=
+lign:middle;color:rgb(52,52,52)"><img src=3D"https://wizzair.com/static/ima=
+ges/ico-priority.jpg" style=3D"font-family: Helvetica, Arial, sans-serif;">=
+</td><td style=3D"width:100%;border-collapse:collapse;font-family:Helvetica=
+,Arial,sans-serif;font-size:14px;font-weight:bold;line-height:1.3;margin:0p=
+x;padding:0px;text-align:left;vertical-align:middle;color:rgb(209,0,123)"><=
+span style=3D"font-family:Helvetica,Arial,sans-serif">WIZZ PRIORITY</span><=
+/td></tr>
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td colspan=3D"2" style=3D"border-collapse:coll=
+apse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:norm=
+al;line-height:1.3;margin:0px;padding:0px 10px 0px 0px;text-align:left;vert=
+ical-align:middle;color:rgb(54,54,54)">Only passengers with WIZZ Priority w=
+ill be able to bring their hand luggage (55x40x23cm, max. 10kg) onboard sub=
+ject to boarding procedures at each airport.</td></tr></tbody></table></td>=
+<td style=3D"width:50%;border-collapse:collapse;font-family:Helvetica,Arial=
+,sans-serif;font-size:20px;font-weight:400;line-height:1.3;margin:0px;paddi=
+ng:20px 0px 0px;text-align:center;vertical-align:middle;color:rgb(52,52,52)=
+"><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"table-la=
+yout:fixed;border-collapse:collapse;border-spacing:0px;padding:0px;margin:0=
+px;text-align:left;vertical-align:middle;width:100%;font-family:Helvetica,A=
+rial,sans-serif" width=3D"100%"><tbody style=3D"font-family:Helvetica,Arial=
+,sans-serif">
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td style=3D"border-collapse:collapse;font-fami=
+ly:Helvetica,Arial,sans-serif;font-size:13px;font-weight:bold;line-height:1=
+.3;margin:0px;padding:20px 0px;text-align:center;vertical-align:middle;back=
+ground-color:rgb(181,29,131);color:rgb(255,255,255)"><a style=3D"text-decor=
+ation:none;text-transform:uppercase;font-family:Helvetica,Arial,sans-serif;=
+color:rgb(255,255,255)" href=3D"https://wizzair.com/en-GB/FlightReminder/PF=
+I75P/Lipovica?utm_source=3Dwizz&amp;utm_medium=3Demail&amp;utm_campaign=3Ds=
+ystem_email_itinerary_confirmation" target=3D"_blank">
+                        ADD WIZZ PRIORITY
+                      </a></td></tr>
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td style=3D"border-collapse:collapse;font-fami=
+ly:Helvetica,Arial,sans-serif;font-size:13px;font-weight:normal;line-height=
+:1.3;margin:0px;padding:10px 0px 0px;text-align:center;vertical-align:middl=
+e;color:rgb(99,8,115)"><a href=3D"https://wizzair.com/en-gb/information-and=
+-services/wizz-services/wizz-priority?utm_source=3Dwizz&amp;utm_medium=3Dem=
+ail&amp;utm_campaign=3Dsystem_email_itinerary_confirmation" target=3D"_blan=
+k" style=3D"font-family:Helvetica,Arial,sans-serif">
+                      For more information click here
+                    </a></td></tr></tbody></table></td></tr>
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td style=3D"width:50%;border-collapse:collapse=
+;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:400;line=
+-height:1.3;margin:0px;padding:20px 0px 0px;text-align:left;vertical-align:=
+middle;color:rgb(52,52,52)"><table border=3D"0" cellpadding=3D"0" cellspaci=
+ng=3D"0" style=3D"border-collapse:collapse;border-spacing:0px;padding:0px;m=
+argin:0px;text-align:left;vertical-align:middle;width:100%;font-family:Helv=
+etica,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-family:Helvetic=
+a,Arial,sans-serif">
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td style=3D"width:36px;border-collapse:collaps=
+e;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:400;lin=
+e-height:1.3;margin:0px;padding:0px 10px 0px 0px;text-align:left;vertical-a=
+lign:middle;color:rgb(52,52,52)"><img src=3D"https://wizzair.com/static/ima=
+ges/common/ico-bag.png" style=3D"font-family: Helvetica, Arial, sans-serif;=
+"></td><td style=3D"width:100%;border-collapse:collapse;font-family:Helveti=
+ca,Arial,sans-serif;font-size:14px;font-weight:bold;line-height:1.3;margin:=
+0px;padding:0px;text-align:left;vertical-align:middle;color:rgb(209,0,123)"=
+><span style=3D"font-family:Helvetica,Arial,sans-serif">CHECKED-IN BAGS</sp=
+an></td></tr>
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td colspan=3D"2" style=3D"border-collapse:coll=
+apse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:norm=
+al;line-height:1.3;margin:0px;padding:0px 10px 0px 0px;text-align:left;vert=
+ical-align:middle;color:rgb(54,54,54)">
+                    Add checked-in bags to your bookings. Wizz Air offers 1=
+0Kg, 20Kg, 26Kg and 32Kg options.
+                  </td></tr></tbody></table></td><td style=3D"width:50%;bor=
+der-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:20px=
+;font-weight:400;line-height:1.3;margin:0px;padding:20px 0px 0px;text-align=
+:center;vertical-align:middle;color:rgb(52,52,52)"><table border=3D"0" cell=
+padding=3D"0" cellspacing=3D"0" style=3D"table-layout:fixed;border-collapse=
+:collapse;border-spacing:0px;padding:0px;margin:0px;text-align:left;vertica=
+l-align:middle;width:100%;font-family:Helvetica,Arial,sans-serif" width=3D"=
+100%"><tbody style=3D"font-family:Helvetica,Arial,sans-serif">
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td style=3D"border-collapse:collapse;font-fami=
+ly:Helvetica,Arial,sans-serif;font-size:13px;font-weight:bold;line-height:1=
+.3;margin:0px;padding:20px 0px;text-align:center;vertical-align:middle;back=
+ground-color:rgb(181,29,131);color:rgb(255,255,255)"><a style=3D"text-decor=
+ation:none;text-transform:uppercase;font-family:Helvetica,Arial,sans-serif;=
+color:rgb(255,255,255)" href=3D"https://wizzair.com/en-GB/FlightReminder/PF=
+I75P/Lipovica?utm_source=3Dwizz&amp;utm_medium=3Demail&amp;utm_campaign=3Ds=
+ystem_email_itinerary_confirmation" target=3D"_blank">
+                        ADD CHECKED-IN BAG
+                      </a></td></tr>
+<tr style=3D"padding:0px;text-align:left;vertical-align:middle;font-family:=
+Helvetica,Arial,sans-serif"><td style=3D"border-collapse:collapse;font-fami=
+ly:Helvetica,Arial,sans-serif;font-size:13px;font-weight:normal;line-height=
+:1.3;margin:0px;padding:10px 0px 0px;text-align:center;vertical-align:middl=
+e;color:rgb(99,8,115)"><a href=3D"https://wizzair.com/en-GB/information-and=
+-services/travel-information/baggage?utm_source=3Dwizz&amp;utm_medium=3Dema=
+il&amp;utm_campaign=3Dsystem_email_itinerary_confirmation" target=3D"_blank=
+" style=3D"font-family:Helvetica,Arial,sans-serif">
+                      For more information click here
+                    </a></td></tr></tbody></table></td></tr></tbody></table=
+>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"table-layo=
+ut:fixed;border-collapse:collapse;border-spacing:0px;padding:0px;margin:10p=
+x 0px 0px;text-align:left;vertical-align:middle;width:100%;font-family:Helv=
+etica,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-family:Helvetic=
+a,Arial,sans-serif">
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:0px;text-align:left;vertical-align:middle;color:rgb(54=
+,54,54)">
+            Itinerary
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:0px;text-align:left;vertical-align:middle;color:rgb(16=
+8,168,168)">
+            This itinerary is a confirmation of your reservation and part o=
+f your electronic ticket. Your booking is now confirmed and you do not need=
+ to contact us before flying to re-confirm your travel arrangements. This t=
+icket is issued as a ticket with fixed flight date. According to the tariff=
+ rules, all fares, taxes, charges and fees for other services for unused fl=
+ights are non-refundable except as explicitly provided in the general condi=
+tions of carriage. All Wizz flights are economy-class only.
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:10px 0px 0px;text-align:left;vertical-align:middle;col=
+or:rgb(54,54,54)">
+            Travel documents
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:0px;text-align:left;vertical-align:middle;color:rgb(16=
+8,168,168)"><a style=3D"font-weight:normal;font-family:Helvetica,Arial,sans=
+-serif;color:rgb(102,15,110)" href=3D"https://wizzair.com/en-gb/information=
+-and-services/travel-information/travel-documents#/?utm_source=3Dwizz&amp;u=
+tm_medium=3Demail&amp;utm_campaign=3Dsystem_email_itinerary_confirmation&am=
+p;utm_content=3Dphotoid" target=3D"_blank">Approved photographic ID</a> is =
+required on all flights to comply with the requirements of your departure a=
+nd destination countries. If you have checked-in online you must present th=
+e same travel documents given during the web check-in at airport security a=
+nd boarding gate.
+            </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:10px 0px 0px;text-align:left;vertical-align:middle;col=
+or:rgb(54,54,54)">
+            Covid-related requirements
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:0px;text-align:left;vertical-align:middle;color:rgb(16=
+8,168,168)">
+            You are responsible for being aware of the travel conditions an=
+d applicable necessary documents related to your country of arrival prior t=
+o the travel! We recommend you to check our Travel planning map in order to=
+ be well informed about the applicable travel and entrance regulations of y=
+our destination country with regard to the requirements for testing, vaccin=
+ation or documentation.
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:10px 0px 0px;text-align:left;vertical-align:middle;col=
+or:rgb(54,54,54)">
+            Check-in and Boarding
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:0px;text-align:left;vertical-align:middle;color:rgb(16=
+8,168,168)">
+            In case you have not purchased any seats with your booking, che=
+ck-in will become available only 48 hours before departure.
+            In case you purchased auto check-in, it will occur automaticall=
+y 50 hours before departure.
+            At the airport you can check-in for a fee.
+            You need to be present at the boarding gate no later than 30 mi=
+nutes before the scheduled departure time.
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:10px 0px 0px;text-align:left;vertical-align:middle;col=
+or:rgb(54,54,54)">
+            Children/Minors
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:0px;text-align:left;vertical-align:middle;color:rgb(16=
+8,168,168)">
+            If your reservation includes a child/minor please make sure you=
+ are aware of the rules of the departure country regarding children travell=
+ing abroad. Please make sure that you are in possession of all the necessar=
+y documents (eg. permissions from parents not travelling) required by that =
+country. If you are travelling with an infant and have checked-in online, p=
+lease print the infant's boarding card as you will need to present it at th=
+e boarding gate.
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:10px 0px 0px;text-align:left;vertical-align:middle;col=
+or:rgb(54,54,54)">
+            Changes of reservation
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:0px;text-align:left;vertical-align:middle;color:rgb(16=
+8,168,168)">
+            You can change the date, time and routing of your flight online=
+ or via the call centre and up to 3 hours prior to scheduled departure time=
+. You will be required to pay change fee and any fare difference if applica=
+ble.
+            <br><br>
+            Please note that the times of departure and arrival shown in ou=
+r schedule and elsewhere are not guaranteed and they do not form part of yo=
+ur contract of carriage with us. We reserve the right to change them. In ca=
+se the alteration was initiated until at least the 14th day preceding the d=
+eparture of the flight and the change results in less than two hours differ=
+ence in time, then You will be automatically offered to travel with the sam=
+e flight.
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:10px 0px 0px;text-align:left;vertical-align:middle;col=
+or:rgb(54,54,54)">
+            Claims
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:0px;text-align:left;vertical-align:middle;color:rgb(16=
+8,168,168)">
+            Acceptance of the baggage without complaint made before leaving=
+ the transit area and without completion of the Property Irregularity Repor=
+t (PIR) is considered to be evidence that the baggage has been delivered in=
+ good condition and in accordance with the contract of carriage. For more i=
+nformation regarding baggage claim please refer to the proper section of th=
+e
+            <a style=3D"font-weight:normal;font-family:Helvetica,Arial,sans=
+-serif;color:rgb(102,15,110)" href=3D"https://wizzair.com/en-gb/legal/gener=
+al-conditions-of-carriage-for-passengers-and-baggage?utm_source=3Dwizz&amp;=
+utm_medium=3Demail&amp;utm_campaign=3Dsystem_email_itinerary_confirmation&a=
+mp;utm_content=3Dclaims" target=3D"_blank">general conditions of carriage</=
+a>.
+            <br><br>
+            Complaints relating to the carriage by air (other than baggage =
+claims) must be made in writing as soon as possible, after arrival of the f=
+light in connection with which you would like to complain, but not later th=
+an within 2 months from discovering the circumstances giving rise to the co=
+mplaint. You are liable for any loss or damage arising from the delay in ma=
+king your complaint. Wizz Air will assess the complaint according to the ge=
+neral conditions of carriage effective on the day of the contract.
+            <br><br>
+            Please file your complaints through the following website:
+            <a style=3D"font-weight:normal;font-family:Helvetica,Arial,sans=
+-serif;color:rgb(102,15,110)" href=3D"https://wizzair.com/en-gb/information=
+-and-services/compliments-and-complaints/?utm_source=3Dwizz&amp;utm_medium=
+=3Demail&amp;utm_campaign=3Dsystem_email_itinerary_confirmation" target=3D"=
+_blank">https://wizzair.com/en-gb/information-and-services/compliments-and-=
+complaints/</a>.
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:10px 0px 0px;text-align:left;vertical-align:middle;col=
+or:rgb(54,54,54)">
+            Medicine on Board
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:0px;text-align:left;vertical-align:middle;color:rgb(16=
+8,168,168)">
+            We kindly recommend taking any necessary MEDCINE on board with =
+you which you might need during the flight.
+            Keep medicine in your HAND LUGGAGE at all times in its original=
+ packaging, carry enough to last the duration of your trip and carry it in =
+your HANDBAG for easy access.
+            We kindly recommend that you inform your cabin crew of any ALLE=
+RGIES or ILLNESSES. Wear a Medic-Alert bracelet or necklace. Consider avoid=
+ing travelling alone if you have health problems.
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:10px 0px 0px;text-align:left;vertical-align:middle;col=
+or:rgb(54,54,54)">
+            Conditions of contract
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:0px;text-align:left;vertical-align:middle;color:rgb(16=
+8,168,168)">
+            The provisions applicable to the carriage by air of Passengers =
+and Baggage performed by Wizz Air are set out in the
+            <a style=3D"font-weight:normal;font-family:Helvetica,Arial,sans=
+-serif;color:rgb(102,15,110)" href=3D"https://wizzair.com/en-gb/legal/gener=
+al-conditions-of-carriage-for-passengers-and-baggage?utm_source=3Dwizz&amp;=
+utm_medium=3Demail&amp;utm_campaign=3Dsystem_email_itinerary_confirmation&a=
+mp;utm_content=3Dgcc" target=3D"_blank">General Conditions of Carriage.</a>=
+</td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:10px 0px 0px;text-align:left;vertical-align:middle;col=
+or:rgb(54,54,54)">
+            Liability
+          </td></tr>
+<tr style=3D"text-align:left;vertical-align:middle;font-family:Helvetica,Ar=
+ial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;font-famil=
+y:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;line-height:1.=
+3;margin:0px;padding:0px;text-align:left;vertical-align:middle;color:rgb(16=
+8,168,168)">
+            If the passenger=E2=80=99s journey involves an ultimate destina=
+tion or stop in a country other than the country of departure, the Montreal=
+ Convention or the Warsaw Convention may be applicable. These conventions g=
+overn and in most cases limit the liability of carriers for death or person=
+al injury and in respect of loss or damage to baggage. Please refer to the
+            <a style=3D"font-weight:normal;font-family:Helvetica,Arial,sans=
+-serif;color:rgb(102,15,110)" href=3D"https://wizzair.com/en-gb/legal/gener=
+al-conditions-of-carriage-for-passengers-and-baggage?utm_source=3Dwizz&amp;=
+utm_medium=3Demail&amp;utm_campaign=3Dsystem_email_itinerary_confirmation&a=
+mp;utm_content=3Dclaims" target=3D"_blank">general conditions of carriage</=
+a>
+            and applicable national and international legislation for compl=
+ete information regarding air carriers=E2=80=99 liability limits and claims=
+ procedures.
+            <br><br></td></tr></tbody></table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"table-layo=
+ut:fixed;border-collapse:collapse;border-spacing:0px;margin:0px;padding:0px=
+;text-align:left;vertical-align:top;width:100%;font-family:Helvetica,Arial,=
+sans-serif;background-color:rgb(61,101,178)" width=3D"100%"><tbody style=3D=
+"font-family:Helvetica,Arial,sans-serif">
+<tr style=3D"padding:0px;text-align:right;vertical-align:top;font-family:He=
+lvetica,Arial,sans-serif"><td style=3D"width:100%;border-collapse:collapse;=
+font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:normal;ma=
+rgin:0px;padding:30px 20px 20px;text-align:center;vertical-align:middle;tex=
+t-transform:uppercase;color:rgb(255,255,255)">
+            Are you interested in our special offers? Sign up now!
+          </td></tr>
+<tr style=3D"padding:0px;text-align:right;vertical-align:top;font-family:He=
+lvetica,Arial,sans-serif"><td align=3D"center" style=3D"width:100%;border-c=
+ollapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:16px;font=
+-weight:bold;margin:0px;padding:30px 0px 40px;text-align:center;vertical-al=
+ign:middle;text-transform:uppercase;color:rgb(255,255,255)"><a style=3D"tex=
+t-transform:uppercase;text-decoration:none;font-family:Helvetica,Arial,sans=
+-serif;padding:15px 30px!important;background-color:rgb(181,29,131);color:r=
+gb(255,255,255)" href=3D"https://wizzair.com/en-gb/NewsLetter?utm_source=3D=
+wizz&amp;utm_medium=3Demail&amp;utm_campaign=3Dsystem_email_itinerary_confi=
+rmation" target=3D"_blank">SUBSCRIBE</a></td></tr></tbody></table><table bo=
+rder=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:100%;font-fam=
+ily:Helvetica,Arial,sans-serif" width=3D"100%"><tbody style=3D"font-family:=
+Helvetica,Arial,sans-serif"><tr style=3D"font-family:Helvetica,Arial,sans-s=
+erif"><td style=3D"padding:10px 0px 0px;font-family:Helvetica,Arial,sans-se=
+rif"></td></tr></tbody></table>
+<img src=3D"http://www.google-analytics.com/collect?v=3D1&amp;tid=3DUA-2629=
+375-1&amp;cid=3D3C1731C8-A73D-4E3D-8D31-3A6CBE972A4F&amp;t=3Devent&amp;ec=
+=3Demail&amp;ea=3Dopen&amp;el=3Dopen_system_email_itinerary_confirmation&am=
+p;cs=3Dwizz&amp;cm=3Demail&amp;cn=3Dopen_system_email_itinerary_confirmatio=
+n" style=3D"font-family: Helvetica, Arial, sans-serif;">
+                                                                    </th>
+                                                                  </tr>
+                                                                </tbody>
+                                                              </table>
+                                                              <table style=
+=3D"border-collapse:collapse;border-spacing:0px;padding:0px;text-align:left=
+;vertical-align:top;width:100%;font-family:Helvetica,Arial,sans-serif">
+                                                                <tbody styl=
+e=3D"font-family:Helvetica,Arial,sans-serif">
+                                                                  <tr style=
+=3D"padding:0px;text-align:left;vertical-align:top;font-family:Helvetica,Ar=
+ial,sans-serif">
+                                                                    <td hei=
+ght=3D"30px" style=3D"border-collapse:collapse;font-family:Helvetica,Arial,=
+sans-serif;font-size:30px;font-weight:400;line-height:30px;margin:0px;paddi=
+ng:0px;text-align:left;vertical-align:top;color:rgb(52,52,52)">&nbsp;</td>
+                                                                  </tr>
+                                                                </tbody>
+                                                              </table>
+                                                              <table style=
+=3D"border-collapse:collapse;border-spacing:0px;padding:0px;text-align:left=
+;vertical-align:top;width:100%;font-family:Helvetica,Arial,sans-serif">
+                                                                <tbody styl=
+e=3D"font-family:Helvetica,Arial,sans-serif">
+                                                                  <tr style=
+=3D"padding:0px;text-align:left;vertical-align:top;font-family:Helvetica,Ar=
+ial,sans-serif">
+                                                                    <td sty=
+le=3D"border-bottom-width:1px;border-bottom-style:solid;border-collapse:col=
+lapse;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:400=
+;height:1px;line-height:1px;margin:0px;padding:0px;text-align:left;vertical=
+-align:top;border-bottom-color:rgb(242,242,242);color:rgb(52,52,52)"></td><=
+/tr></tbody></table></th></tr></tbody></table></th></tr></tbody></table></t=
+h></tr></tbody></table></th></tr></tbody></table></th></tr></tbody></table>=
+</td></tr></tbody></table></center></td></tr></tbody></table></div></div></=
+div>
+
+--0000000000003fd94a060e71e84f--

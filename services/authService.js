@@ -1,5 +1,5 @@
 const admin = require("../config/firebase");
-const pool = require("../config/db");
+const { pool } = require("../config/db");
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
